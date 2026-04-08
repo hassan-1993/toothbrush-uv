@@ -1,0 +1,423 @@
+{% comment %}
+  Section: Featured Product Card
+  Displays a single product card with image + price pulled from a real Shopify product.
+  Badge, tagline, feature bullets, and shipping note are editable via the customizer.
+  CTAs: Add to Cart · Buy Now · View More Details
+{% endcomment %}
+
+{% assign product = section.settings.product %}
+
+<style>
+  .hh-fpc {
+    background: linear-gradient(160deg, #f0f7ff 0%, #f7f9fb 50%, #eef6f4 100%);
+    padding: 80px 0;
+  }
+  .hh-fpc__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── Optional section header ── */
+  .hh-fpc__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .hh-fpc__badge {
+    display: inline-block;
+    background: rgba(11,79,114,0.08);
+    color: #0b4f72;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(11,79,114,0.15);
+  }
+  .hh-fpc__section-title {
+    font-family: var(--font-heading-family, sans-serif);
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 700;
+    color: #0d1b2a;
+    margin: 0 0 8px;
+  }
+  .hh-fpc__section-sub {
+    font-size: 15px;
+    color: #666;
+    margin: 0;
+  }
+
+  /* ── Card grid — shows 1 or 2 cards side by side ── */
+  .hh-fpc__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+    justify-content: center;
+  }
+
+  /* ── Single card ── */
+  .hh-fpc__card {
+    background: #fff;
+    border: 1px solid #e0e8f0;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .hh-fpc__card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  }
+
+  /* Image area */
+  .hh-fpc__img-wrap {
+    position: relative;
+    height: 360px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f4f8fb;
+  }
+  .hh-fpc__img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 16px;
+  }
+  .hh-fpc__tag {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: #0b4f72;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+  }
+
+  /* Card body */
+  .hh-fpc__body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  .hh-fpc__name {
+    font-family: var(--font-heading-family, sans-serif);
+    font-size: 18px;
+    font-weight: 700;
+    color: #0d1b2a;
+    margin: 0 0 6px;
+    line-height: 1.3;
+  }
+  .hh-fpc__tagline {
+    font-size: 13px;
+    color: #0b4f72;
+    font-weight: 600;
+    margin: 0 0 14px;
+  }
+
+  /* Feature bullets */
+  .hh-fpc__features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .hh-fpc__features li {
+    font-size: 13px;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hh-fpc__features li::before {
+    content: "✓";
+    color: #0b4f72;
+    font-weight: 700;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  /* Footer: price + CTAs */
+  .hh-fpc__footer {
+    border-top: 1px solid #e0e8f0;
+    padding-top: 18px;
+    margin-top: auto;
+  }
+  .hh-fpc__price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .hh-fpc__price {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0d1b2a;
+  }
+  .hh-fpc__price-note {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 16px;
+  }
+
+  /* CTA buttons */
+  .hh-fpc__cta-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hh-fpc__cta-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .hh-fpc__btn {
+    display: block;
+    text-align: center;
+    padding: 13px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    width: 100%;
+    font-family: var(--font-body-family, sans-serif);
+  }
+  .hh-fpc__btn--primary {
+    background: #0b4f72;
+    color: #fff;
+    border-color: #0b4f72;
+  }
+  .hh-fpc__btn--primary:hover {
+    background: #083d58;
+    border-color: #083d58;
+    color: #fff;
+  }
+  .hh-fpc__btn--outline {
+    background: transparent;
+    color: #0b4f72;
+    border-color: #0b4f72;
+  }
+  .hh-fpc__btn--outline:hover {
+    background: #0b4f72;
+    color: #fff;
+  }
+  .hh-fpc__btn--text {
+    background: transparent;
+    color: #0b4f72;
+    border-color: transparent;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    padding: 8px 0;
+  }
+  .hh-fpc__btn--text:hover {
+    color: #083d58;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    .hh-fpc { padding: 56px 0; }
+    .hh-fpc__img-wrap { height: 280px; }
+    .hh-fpc__cta-row { grid-template-columns: 1fr; }
+  }
+</style>
+
+<section class="hh-fpc">
+  <div class="hh-fpc__container">
+
+    {% if section.settings.section_badge != blank or section.settings.section_title != blank %}
+      <div class="hh-fpc__header">
+        {% if section.settings.section_badge != blank %}
+          <div class="hh-fpc__badge">{{ section.settings.section_badge }}</div>
+        {% endif %}
+        {% if section.settings.section_title != blank %}
+          <h2 class="hh-fpc__section-title">{{ section.settings.section_title }}</h2>
+        {% endif %}
+        {% if section.settings.section_sub != blank %}
+          <p class="hh-fpc__section-sub">{{ section.settings.section_sub }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="hh-fpc__grid">
+      {% for block in section.blocks %}
+        {% assign block_product = block.settings.product %}
+
+        {% if block_product != blank %}
+          <div class="hh-fpc__card" {{ block.shopify_attributes }}>
+
+            <!-- Image — linked to product -->
+            <a href="{{ block_product.url }}" class="hh-fpc__img-wrap">
+              {% if block_product.featured_image %}
+                <img
+                  src="{{ block_product.featured_image | image_url: width: 800 }}"
+                  alt="{{ block_product.featured_image.alt | default: block_product.title | escape }}"
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                >
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag }}
+              {% endif %}
+              {% if block.settings.tag != blank %}
+                <span class="hh-fpc__tag">{{ block.settings.tag }}</span>
+              {% endif %}
+            </a>
+
+            <!-- Body -->
+            <div class="hh-fpc__body">
+              <h3 class="hh-fpc__name">{{ block_product.title }}</h3>
+
+              {% if block.settings.tagline != blank %}
+                <p class="hh-fpc__tagline">{{ block.settings.tagline }}</p>
+              {% endif %}
+
+              <!-- Feature bullets -->
+              {% if block.settings.feature_1 != blank or block.settings.feature_2 != blank or block.settings.feature_3 != blank or block.settings.feature_4 != blank %}
+                <ul class="hh-fpc__features">
+                  {% if block.settings.feature_1 != blank %}<li>{{ block.settings.feature_1 }}</li>{% endif %}
+                  {% if block.settings.feature_2 != blank %}<li>{{ block.settings.feature_2 }}</li>{% endif %}
+                  {% if block.settings.feature_3 != blank %}<li>{{ block.settings.feature_3 }}</li>{% endif %}
+                  {% if block.settings.feature_4 != blank %}<li>{{ block.settings.feature_4 }}</li>{% endif %}
+                </ul>
+              {% endif %}
+
+              <!-- Footer: price + CTAs -->
+              <div class="hh-fpc__footer">
+                <div class="hh-fpc__price-row">
+                  <span class="hh-fpc__price">{{ block_product.price | money }}</span>
+                </div>
+                {% if block.settings.price_note != blank %}
+                  <p class="hh-fpc__price-note">{{ block.settings.price_note }}</p>
+                {% endif %}
+
+                <div class="hh-fpc__cta-group">
+                  <!-- Add to Cart + Buy Now -->
+                  {% form 'product', block_product %}
+                    <input type="hidden" name="id" value="{{ block_product.selected_or_first_available_variant.id }}">
+                    <div class="hh-fpc__cta-row">
+                      <button type="submit" name="add" class="hh-fpc__btn hh-fpc__btn--primary">
+                        Add to Cart
+                      </button>
+                      <button type="submit" name="checkout" class="hh-fpc__btn hh-fpc__btn--outline">
+                        Buy Now
+                      </button>
+                    </div>
+                  {% endform %}
+
+                  <!-- View More Details -->
+                  <a href="{{ block_product.url }}" class="hh-fpc__btn hh-fpc__btn--text">
+                    View More Details →
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Product Cards",
+  "tag": "section",
+  "class": "hh-fpc-section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_badge",
+      "label": "Section badge",
+      "default": "Our Products"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section heading",
+      "default": "UV Sanitizers — Choose Your Clean"
+    },
+    {
+      "type": "text",
+      "id": "section_sub",
+      "label": "Section subheading",
+      "default": "Two products, one mission: a bacteria-free toothbrush every single day."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Badge label (e.g. Best for Travel)",
+          "default": "Best for Travel"
+        },
+        {
+          "type": "text",
+          "id": "tagline",
+          "label": "Tagline",
+          "default": "Travel anywhere. Stay protected."
+        },
+        {
+          "type": "text",
+          "id": "feature_1",
+          "label": "Feature 1",
+          "default": "UVC 99.9% kill rate — hospital grade"
+        },
+        {
+          "type": "text",
+          "id": "feature_2",
+          "label": "Feature 2",
+          "default": "One-key automatic start & stop"
+        },
+        {
+          "type": "text",
+          "id": "feature_3",
+          "label": "Feature 3",
+          "default": "1500 mAh · ~15 days battery life"
+        },
+        {
+          "type": "text",
+          "id": "feature_4",
+          "label": "Feature 4",
+          "default": "Drainage system prevents bacteria breeding"
+        },
+        {
+          "type": "text",
+          "id": "price_note",
+          "label": "Price note",
+          "default": "Free shipping included"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Product Cards"
+    }
+  ]
+}
+{% endschema %}
