@@ -1,0 +1,101 @@
+<section class="hero">
+
+  <!-- LEFT -->
+  <div class="hero__left"
+    style="
+      {% if section.settings.left_bg %}
+        background-image: url({{ section.settings.left_bg | image_url: width: 1200 }});
+      {% endif %}
+    "
+  >
+
+    <h1>Hero Left Content</h1>
+
+  </div>
+
+  <!-- RIGHT -->
+  <div class="hero__right"
+    style="
+      {% if section.settings.right_bg %}
+        background-image: url({{ section.settings.right_bg | image_url: width: 1200 }});
+      {% endif %}
+    "
+  >
+
+    <h1>Hero Right Content</h1>
+
+  </div>
+
+</section>
+
+<style>
+.hero {
+  min-height: 600px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* BOTH SIDES */
+.hero__left,
+.hero__right {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px;
+  color: white;
+}
+
+/* LEFT */
+.hero__left {
+  background-color: #04111e; /* fallback */
+}
+
+/* RIGHT */
+.hero__right {
+  position: relative;
+  background-color: #04111e;
+}
+
+/* OPTIONAL overlay (your original effect) */
+.hero__right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(56,189,248,0.15), transparent);
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Hero Split",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "left_bg",
+      "label": "Left background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_bg",
+      "label": "Right background image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Split"
+    }
+  ]
+}
+{% endschema %}

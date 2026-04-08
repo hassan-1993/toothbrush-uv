@@ -1,0 +1,122 @@
+<div class="trust-bar">
+  {% for block in section.blocks %}
+    <div class="trust-bar__item" {{ block.shopify_attributes }}>
+      
+      {% if block.settings.icon_image != blank %}
+        <img 
+          src="{{ block.settings.icon_image | image_url: width: 80 }}" 
+          alt="{{ block.settings.title }}"
+          class="icon-img"
+        >
+      {% else %}
+        <div class="icon">{{ block.settings.icon }}</div>
+      {% endif %}
+
+      <div>
+        <p class="title">{{ block.settings.title }}</p>
+        <p class="subtitle">{{ block.settings.subtitle }}</p>
+        <p class="subtitle">{{ block.settings.subWord}}</p>
+      </div>
+
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+.trust-bar {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background: #f5f5f5;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.trust-bar__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon {
+  font-size: 24px;
+  background: #e6eef6;
+  padding: 12px;
+  border-radius: 50%;
+}
+
+.icon-img {
+  width: 40px;
+  height: 40px;
+}
+
+.title {
+  font-weight: 600;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: #666;
+  margin: 0;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Trust Bar",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji icon",
+          "default": "🚚"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon image (optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "On all orders"
+        },
+         {
+          "type": "text",
+          "id": "subWord",
+          "label": "bitch",
+          "default": "ok sir"
+        },
+          {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Bar",
+      "blocks": [
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" }
+      ]
+    }
+  ]
+}
+{% endschema %}

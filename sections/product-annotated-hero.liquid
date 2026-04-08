@@ -1,0 +1,376 @@
+{% comment %}
+  Section: Main Hero
+  HimayaHome — UV Toothbrush Sanitizer
+  Upload via: Online Store → Edit Code → sections → Add new section → paste this file
+{% endcomment %}
+
+<section class="hh-hero">
+
+  <!-- ── LEFT: Educate the visitor ──────────── -->
+  <div class="hh-hero__left">
+
+    <div class="hh-hero__what">
+      <div class="hh-hero__what-dot"></div>
+      UV Toothbrush Sanitizer
+    </div>
+
+    <h1 class="hh-hero__product-name">
+      A Smart Device That<br><span>Kills Bacteria</span> on<br>Your Toothbrush
+    </h1>
+
+    <p class="hh-hero__one-liner">
+      Your toothbrush touches 10 million bacteria every morning. It's time to do something about it.
+    </p>
+
+    <div class="hh-hero__buttons">
+      <a href="#products" class="hh-btn hh-btn--white">See the Products</a>
+    </div>
+
+    <div class="hh-hero__proof">
+      <div class="hh-hero__proof-item">
+        <strong>99.9%</strong>
+        <span>Bacteria<br>eliminated</span>
+      </div>
+      <div class="hh-hero__proof-item">
+        <strong>99s</strong>
+        <span>Full<br>cycle time</span>
+      </div>
+      <div class="hh-hero__proof-item">
+        <strong>4.9★</strong>
+        <span>Customer<br>rating</span>
+      </div>
+      <div class="hh-hero__proof-item">
+        <strong>CE</strong>
+        <span>Lab<br>certified</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── RIGHT: Product image + annotated callouts ── -->
+  <div class="hh-hero__right">
+
+    {% if section.settings.main_image != blank %}
+      <img
+        class="hh-hero__product-img"
+        src="{{ section.settings.main_image | image_url: width: 1200 }}"
+        alt="HimayaHome Wall-Mounted UV Toothbrush Sterilizer"
+        width=""
+        height=""
+      >
+    {% endif %}
+
+  
+
+    {% for block in section.blocks limit: 5 %}
+    {% case forloop.index %}
+      {% when 1 %}
+        <!-- Callout 1: top left -->
+        <div class="hh-pin hh-pin--top-left" {{ block.shopify_attributes }}>
+          <div class="hh-pin__dot"></div>
+          <div class="hh-pin__line" style="width:36px;"></div>
+          <div class="hh-pin__bubble">
+            <strong>{{ block.settings.title }}</strong>
+            <span>{{ block.settings.subtitle }}</span>
+          </div>
+        </div>
+
+      {% when 2 %}
+        <!-- Callout 2: mid left -->
+        <div class="hh-pin hh-pin--mid-left" {{ block.shopify_attributes }}>
+          <div class="hh-pin__dot"></div>
+          <div class="hh-pin__line" style="width:48px;"></div>
+          <div class="hh-pin__bubble">
+            <strong>{{ block.settings.title }}</strong>
+            <span>{{ block.settings.subtitle }}</span>
+          </div>
+        </div>
+
+      {% when 3 %}
+        <!-- Callout 3: bottom left -->
+        <div class="hh-pin hh-pin--bot-left" {{ block.shopify_attributes }}>
+          <div class="hh-pin__dot"></div>
+          <div class="hh-pin__line" style="width:36px;"></div>
+          <div class="hh-pin__bubble">
+            <strong>{{ block.settings.title }}</strong>
+            <span>{{ block.settings.subtitle }}</span>
+          </div>
+        </div>
+
+      {% when 4 %}
+        <!-- Callout 4: top right -->
+        <div class="hh-pin hh-pin--top-right" {{ block.shopify_attributes }}>
+          <div class="hh-pin__bubble">
+            <strong>{{ block.settings.title }}</strong>
+            <span>{{ block.settings.subtitle }}</span>
+          </div>
+          <div class="hh-pin__line" style="width:40px;"></div>
+          <div class="hh-pin__dot"></div>
+        </div>
+
+      {% when 5 %}
+        <!-- Callout 5: bottom right -->
+        <div class="hh-pin hh-pin--bot-right" {{ block.shopify_attributes }}>
+          <div class="hh-pin__bubble">
+            <strong>{{ block.settings.title }}</strong>
+            <span>{{ block.settings.subtitle }}</span>
+          </div>
+          <div class="hh-pin__line" style="width:36px;"></div>
+          <div class="hh-pin__dot"></div>
+        </div>
+    {% endcase %}
+  {% endfor %}
+
+  </div>
+
+</section>
+
+
+<style>
+  /* ── Hero wrapper ─────────────────────────────── */
+  .hh-hero {
+    background: #04111e;
+    min-height: 640px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+
+  /* ── Left panel ───────────────────────────────── */
+  .hh-hero__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 72px 48px 72px 60px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hh-hero__what {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(56,189,248,0.12);
+    border: 1px solid rgba(56,189,248,0.35);
+    color: #38bdf8;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    width: fit-content;
+    margin-bottom: 20px;
+  }
+  .hh-hero__what-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #38bdf8;
+    flex-shrink: 0;
+    animation: hhPulse 1.8s ease-in-out infinite;
+  }
+  @keyframes hhPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .hh-hero__product-name {
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin: 0 0 10px;
+  }
+  .hh-hero__product-name span { color: #38bdf8; }
+
+  .hh-hero__one-liner {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    font-style: italic;
+    margin: 0 0 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    line-height: 1.6;
+  }
+
+  .hh-hero__buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+  }
+
+  .hh-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .hh-btn--white {
+    background: #fff;
+    color: #04111e;
+    border-color: #fff;
+  }
+  .hh-btn--white:hover {
+    background: #38bdf8;
+    color: #fff;
+    border-color: #38bdf8;
+  }
+
+  .hh-hero__proof {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .hh-hero__proof-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hh-hero__proof-item strong {
+    font-size: 18px;
+    font-weight: 700;
+    color: #38bdf8;
+  }
+  .hh-hero__proof-item span {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+  }
+
+  /* ── Right panel ──────────────────────────────── */
+  .hh-hero__right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 32px 40px 0;
+  }
+  .hh-hero__right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 55% 50%, rgba(56,189,248,0.13) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hh-hero__product-img {
+    position: relative;
+    z-index: 1;
+    width: 88%;
+    max-width: 420px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 0 32px rgba(56,189,248,0.25));
+  }
+
+  /* ── Annotation pins (prefixed hh-pin to avoid Dawn conflicts) ── */
+  .hh-pin {
+    position: absolute;
+    z-index: 3;
+    display: flex !important;   /* override any Dawn reset */
+    align-items: center;
+    gap: 0;
+  }
+
+  .hh-pin__dot {
+    display: block !important;
+    flex-shrink: 0;
+    width: 10px !important;
+    height: 10px !important;
+    background: #38bdf8 !important;
+    border-radius: 50% !important;
+    box-shadow: 0 0 0 3px rgba(56,189,248,0.25);
+  }
+
+  .hh-pin__line {
+    display: block !important;
+    flex-shrink: 0;
+    height: 2px !important;
+    background: rgba(56,189,248,0.6) !important;
+  }
+
+  .hh-pin__bubble {
+    background: rgba(4,17,30,0.90) !important;
+    border: 1px solid rgba(56,189,248,0.35) !important;
+    padding: 8px 12px;
+    white-space: nowrap;
+  }
+  .hh-pin__bubble strong {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff !important;
+    line-height: 1.3;
+  }
+  .hh-pin__bubble span {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* Left pins: dot → line → bubble (dot nearest the product on the right) */
+  .hh-pin--top-left { top: 12%; left: 2%; flex-direction: row; }
+  .hh-pin--mid-left { top: 44%; left: 0%;  flex-direction: row; }
+  .hh-pin--bot-left { bottom: 16%; left: 4%; flex-direction: row; }
+
+  /* Right pins: bubble → line → dot (dot nearest the product on the left) */
+  .hh-pin--top-right { top: 18%; right: 2%; flex-direction: row; }
+  .hh-pin--bot-right { bottom: 22%; right: 2%; flex-direction: row; }
+
+  /* ── Responsive ───────────────────────────────── */
+  @media (max-width: 960px) {
+    .hh-hero { grid-template-columns: 1fr; min-height: auto; }
+    .hh-hero__right { display: none; }
+    .hh-hero__left  { padding: 56px 24px 60px; }
+    .hh-hero__proof { gap: 16px; }
+  }
+</style>
+
+
+{% schema %}
+{
+  "name": "Main Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "callout",
+      "name": "Callout",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "UVC Light Beam"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Kills 99.9% of bacteria"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main Hero"
+    }
+  ]
+}
+{% endschema %}
