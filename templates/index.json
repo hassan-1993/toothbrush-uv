@@ -132,6 +132,19 @@
             "price_note": "Free shipping included"
           }
         },
+        "product_card_eDBmDB": {
+          "type": "product_card",
+          "settings": {
+            "product": "portable-uv-toothbrush-sanitizer",
+            "tag": "Best for Travel",
+            "tagline": "Travel anywhere. Stay protected.",
+            "feature_1": "UVC 99.9% kill rate — hospital grade",
+            "feature_2": "One-key automatic start & stop",
+            "feature_3": "1500 mAh · ~15 days battery life",
+            "feature_4": "Drainage system prevents bacteria breeding",
+            "price_note": "Free shipping included"
+          }
+        },
         "product_card_BxLXQU": {
           "type": "product_card",
           "settings": {
@@ -161,6 +174,7 @@
       },
       "block_order": [
         "product_card_gtmkTP",
+        "product_card_eDBmDB",
         "product_card_BxLXQU",
         "product_card_raUccQ"
       ],
