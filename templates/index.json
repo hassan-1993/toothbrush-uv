@@ -115,10 +115,52 @@
         "description_1": "Most people rinse their toothbrush and assume it's clean. It isn't. Bacteria colonise the bristles within hours of each use — from toilet aerosols, open air, and moisture. You put this in your mouth twice a day.",
         "description_2": "UVC light is the same technology hospitals use to sterilize surgical equipment. At the right wavelength, it breaks down bacterial DNA — eliminating 99.9% of germs in under two minutes, with no chemicals and no residue."
       }
+    },
+    "featured_product_card_ypBDia": {
+      "type": "featured-product-card",
+      "blocks": {
+        "product_card_gtmkTP": {
+          "type": "product_card",
+          "settings": {
+            "product": "wall-mounted-uvc-toothbrush-sterilizer",
+            "tag": "Best for Travel",
+            "tagline": "Travel anywhere. Stay protected.",
+            "feature_1": "UVC 99.9% kill rate — hospital grade",
+            "feature_2": "One-key automatic start & stop",
+            "feature_3": "1500 mAh · ~15 days battery life",
+            "feature_4": "Drainage system prevents bacteria breeding",
+            "price_note": "Free shipping included"
+          }
+        },
+        "product_card_raUccQ": {
+          "type": "product_card",
+          "settings": {
+            "product": "portable-uv-toothbrush-sanitizer",
+            "tag": "Best for Travel",
+            "tagline": "Travel anywhere. Stay protected.",
+            "feature_1": "UVC 99.9% kill rate — hospital grade",
+            "feature_2": "One-key automatic start & stop",
+            "feature_3": "1500 mAh · ~15 days battery life",
+            "feature_4": "Drainage system prevents bacteria breeding",
+            "price_note": "Free shipping included"
+          }
+        }
+      },
+      "block_order": [
+        "product_card_gtmkTP",
+        "product_card_raUccQ"
+      ],
+      "name": "Featured Product Cards",
+      "settings": {
+        "section_badge": "Our Products",
+        "section_title": "UV Sanitizers — Choose Your Clean",
+        "section_sub": "Two products, one mission: a bacteria-free toothbrush every single day."
+      }
     }
   },
   "order": [
     "product_annotated_hero_U79QMa",
-    "why_uv_iNMf4h"
+    "why_uv_iNMf4h",
+    "featured_product_card_ypBDia"
   ]
 }
