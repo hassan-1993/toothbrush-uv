@@ -115,6 +115,12 @@
   font-size: 1.4rem;
   color: rgb(var(--color-button));
   font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+.hh-pdp__blurb {
+  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.65);
+  line-height: 1.75;
   margin-bottom: 2rem;
 }
 
@@ -426,6 +432,11 @@
           <p class="hh-pdp__subtitle">{{ section.settings.subtitle }}</p>
         {%- endif -%}
 
+        <!-- Short product blurb (manual) -->
+        {%- if section.settings.blurb != blank -%}
+          <p class="hh-pdp__blurb">{{ section.settings.blurb }}</p>
+        {%- endif -%}
+
         <!-- Price row — pulled from product -->
         <div class="hh-pdp__price-row">
           <div class="hh-pdp__price">
@@ -727,6 +738,13 @@
       "id": "subtitle",
       "label": "Subtitle / tagline",
       "default": "Travel-Ready UVC Sterilization — Kills 99.9% of Bacteria"
+    },
+    {
+      "type": "textarea",
+      "id": "blurb",
+      "label": "Product blurb (shown above price)",
+      "info": "2–3 sentences about the product itself — what it is, what it does, key numbers. Not marketing copy.",
+      "default": "A compact UV sterilization case that kills 99.9% of bacteria on your toothbrush bristles in a 99-second automatic cycle. Powered by a 1500 mAh battery (up to 15 days per charge), rechargeable via USB-C, and fitted with drainage outlets to keep the interior dry between uses. Max toothbrush handle length: 15.5 cm."
     },
     {
       "type": "text",
