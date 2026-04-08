@@ -1,1 +1,124 @@
-{"sections":{"product_annotated_hero_U79QMa":{"type":"product-annotated-hero","blocks":{"callout_MGnzf6":{"type":"callout","settings":{"title":"UVC Light Beam","subtitle":"Kills 99.9% of bacteria"}},"callout_YtQUNE":{"type":"callout","settings":{"title":"LED Clock Display","subtitle":"Auto-sterilizes at set times"}},"callout_G9Pith":{"type":"callout","settings":{"title":"3 Rinse Cups Included","subtitle":"Family-ready storage"}},"callout_CExFFe":{"type":"callout","settings":{"title":"Holds 4 Brushes + Razor","subtitle":"Fits whole family"}},"callout_qL7NdJ":{"type":"callout","settings":{"title":"UVC Light Beam","subtitle":"Kills 99.9% of bacteria"}},"callout_4LMn6N":{"type":"callout","settings":{"title":"3 Rinse Cups Included","subtitle":"Family-ready storage"}}},"block_order":["callout_MGnzf6","callout_YtQUNE","callout_G9Pith","callout_CExFFe","callout_qL7NdJ","callout_4LMn6N"],"name":"Main Hero","settings":{"main_image":"shopify:\/\/shop_images\/product_2.png"}}},"order":["product_annotated_hero_U79QMa"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "product_annotated_hero_U79QMa": {
+      "type": "product-annotated-hero",
+      "blocks": {
+        "callout_MGnzf6": {
+          "type": "callout",
+          "settings": {
+            "title": "UVC Light Beam",
+            "subtitle": "Kills 99.9% of bacteria"
+          }
+        },
+        "callout_YtQUNE": {
+          "type": "callout",
+          "settings": {
+            "title": "LED Clock Display",
+            "subtitle": "Auto-sterilizes at set times"
+          }
+        },
+        "callout_G9Pith": {
+          "type": "callout",
+          "settings": {
+            "title": "3 Rinse Cups Included",
+            "subtitle": "Family-ready storage"
+          }
+        },
+        "callout_CExFFe": {
+          "type": "callout",
+          "settings": {
+            "title": "Holds 4 Brushes + Razor",
+            "subtitle": "Fits whole family"
+          }
+        },
+        "callout_qL7NdJ": {
+          "type": "callout",
+          "settings": {
+            "title": "UVC Light Beam",
+            "subtitle": "Kills 99.9% of bacteria"
+          }
+        },
+        "callout_4LMn6N": {
+          "type": "callout",
+          "settings": {
+            "title": "3 Rinse Cups Included",
+            "subtitle": "Family-ready storage"
+          }
+        }
+      },
+      "block_order": [
+        "callout_MGnzf6",
+        "callout_YtQUNE",
+        "callout_G9Pith",
+        "callout_CExFFe",
+        "callout_qL7NdJ",
+        "callout_4LMn6N"
+      ],
+      "name": "Main Hero",
+      "settings": {
+        "main_image": "shopify://shop_images/product_2.png"
+      }
+    },
+    "why_uv_iNMf4h": {
+      "type": "why-uv",
+      "blocks": {
+        "stat_pgHXdB": {
+          "type": "stat",
+          "settings": {
+            "value": "99.9%",
+            "label": "Bacteria killed per UVC cycle"
+          }
+        },
+        "stat_7dqi4R": {
+          "type": "stat",
+          "settings": {
+            "value": "<5%",
+            "label": "Bacteria removed by rinsing"
+          }
+        },
+        "stat_BEfHL3": {
+          "type": "stat",
+          "settings": {
+            "value": "99s",
+            "label": "Full sterilization cycle time"
+          }
+        },
+        "stat_n8eQap": {
+          "type": "stat",
+          "settings": {
+            "value": "0",
+            "label": "Chemicals used — ever"
+          }
+        }
+      },
+      "block_order": [
+        "stat_pgHXdB",
+        "stat_7dqi4R",
+        "stat_BEfHL3",
+        "stat_n8eQap"
+      ],
+      "name": "Why UV?",
+      "settings": {
+        "image": "shopify://shop_images/bacteria-threat-illustration.svg",
+        "image_alt": "Bacteria threat infographic",
+        "badge": "Did You Know?",
+        "title": "Your Toothbrush Is Never Really Clean.",
+        "description_1": "Most people rinse their toothbrush and assume it's clean. It isn't. Bacteria colonise the bristles within hours of each use — from toilet aerosols, open air, and moisture. You put this in your mouth twice a day.",
+        "description_2": "UVC light is the same technology hospitals use to sterilize surgical equipment. At the right wavelength, it breaks down bacterial DNA — eliminating 99.9% of germs in under two minutes, with no chemicals and no residue."
+      }
+    }
+  },
+  "order": [
+    "product_annotated_hero_U79QMa",
+    "why_uv_iNMf4h"
+  ]
+}
