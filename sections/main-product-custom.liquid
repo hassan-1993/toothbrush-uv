@@ -141,9 +141,15 @@
   border: none;
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
+  /* Large invisible tap area without affecting layout */
+  padding: 10px;
+  margin: -10px;
+  background-clip: content-box;
+  box-sizing: content-box;
 }
 .hh-lb-dot.is-active {
   background: #fff;
+  background-clip: content-box;
   transform: scale(1.3);
 }
 
