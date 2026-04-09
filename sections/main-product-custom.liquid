@@ -130,27 +130,40 @@
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 0.8rem;
+  gap: 0;
   z-index: 1;
 }
 .hh-lb-dot {
+  /* 20×20 px transparent button = comfortable tap area, tight visual spacing */
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+/* Visual dot drawn via ::after so it never blocks neighbour clicks */
+.hh-lb-dot::after {
+  content: '';
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: rgba(255,255,255,0.35);
-  border: none;
-  cursor: pointer;
   transition: background 0.2s, transform 0.2s;
-  /* Large invisible tap area without affecting layout */
-  padding: 10px;
-  margin: -10px;
-  background-clip: content-box;
-  box-sizing: content-box;
+  pointer-events: none;
 }
-.hh-lb-dot.is-active {
+.hh-lb-dot.is-active::after {
   background: #fff;
-  background-clip: content-box;
   transform: scale(1.3);
+}
+.hh-lb-dot:not(.is-active):hover::after {
+  background: rgba(255,255,255,0.65);
 }
 
 .hh-pdp__badge {
