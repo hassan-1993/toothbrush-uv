@@ -366,6 +366,23 @@
   .hh-pdp__tab-btn { padding: 1.2rem 1.4rem; font-size: 1.3rem; }
   .hh-pdp__guarantees { gap: 1.2rem; }
 }
+
+/* ── "Buy it now" — outline style ── */
+.hh-pdp__buttons .shopify-payment-button__button--unbranded {
+  background-color: transparent !important;
+  color: rgb(var(--color-button)) !important;
+  border: 2px solid rgb(var(--color-button)) !important;
+  box-shadow: none !important;
+}
+.hh-pdp__buttons .shopify-payment-button__button--unbranded::before,
+.hh-pdp__buttons .shopify-payment-button__button--unbranded::after {
+  display: none !important;
+}
+.hh-pdp__buttons .shopify-payment-button__button--unbranded:hover,
+.hh-pdp__buttons .shopify-payment-button__button--unbranded:hover:not([disabled]) {
+  background-color: rgb(var(--color-button)) !important;
+  color: rgb(var(--color-button-text)) !important;
+}
 </style>
 
 <!-- ══════════════════════════════════════
