@@ -933,18 +933,13 @@
       document.body.style.overflow = '';
     }
 
-    /* Open from main image click — start at whichever thumb is active */
+    /* Open from main image click only — start at whichever thumb is active */
     if (mainWrap) {
       mainWrap.addEventListener('click', function() {
         var activeThumbIdx = thumbs.findIndex(function(t) { return t.classList.contains('is-active'); });
         openLightbox(activeThumbIdx >= 0 ? activeThumbIdx : 0);
       });
     }
-
-    /* Also open when clicking a thumbnail directly */
-    thumbs.forEach(function(t, i) {
-      t.addEventListener('click', function() { openLightbox(i); });
-    });
 
     lbPrev.addEventListener('click', function(e) { e.stopPropagation(); goTo(currentIndex - 1); });
     lbNext.addEventListener('click', function(e) { e.stopPropagation(); goTo(currentIndex + 1); });
