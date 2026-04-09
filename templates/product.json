@@ -9,27 +9,44 @@
  */
 {
   "sections": {
-    "related-products": {
-      "type": "related-products",
-      "settings": {
-        "heading": "You may also like",
-        "heading_size": "h2",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "columns_mobile": "2",
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "padding_top": 36,
-        "padding_bottom": 28
-      }
-    },
     "main_product_custom_4RGeVH": {
       "type": "main-product-custom",
       "blocks": {
+        "desc_item_wbeehB": {
+          "type": "desc_item",
+          "settings": {
+            "heading": "A Bacteria-Free Brush. Every Time.",
+            "content": "<p>Most people never think about what's living on their toothbrush. In reality, your toothbrush is one of the most bacteria-laden objects in your home — exposed to open air, bathroom humidity, and airborne particles from every toilet flush. Water-rinsing removes less than 5% of bacteria. Toothbrush covers trap moisture and actually make it worse.</p><p>The HimayaHome Portable UV Toothbrush Sanitizer uses the same UVC technology trusted in hospitals to sterilize surgical instruments. One press eliminates 99.9% of bacteria, viruses, and mold from your toothbrush bristles in a 99-second cycle — automatically, with zero chemicals.</p>"
+          }
+        },
+        "desc_item_6PdKze": {
+          "type": "desc_item",
+          "settings": {
+            "heading": "Sterilization + Storage in One",
+            "content": "<p>The device does double duty — it sterilizes your brush with UVC light<em>and</em>stores it in a sealed, enclosed case so it stays protected until your next use. No more leaving your brush exposed on a counter. No more bristles touching surfaces. Maximum length supported: 15.5 cm — fits standard and most electric toothbrush handles.</p>"
+          }
+        },
+        "desc_item_dr8yHQ": {
+          "type": "desc_item",
+          "settings": {
+            "heading": "Drainage System — No Bacteria Breeding Inside",
+            "content": "<p>A common problem with toothbrush covers is moisture buildup — wet bristles in an enclosed space become a bacteria farm. HimayaHome solves this with two drainage outlets at the base of the sterilization bin. Water drains out, air circulates in, and the interior stays dry and clean between uses.</p>"
+          }
+        },
+        "desc_item_Jp4Nba": {
+          "type": "desc_item",
+          "settings": {
+            "heading": "Who It's For",
+            "content": "<p>This was built for people on the move — frequent travelers, gym-goers, parents who take their kids' oral hygiene seriously, and anyone who doesn't want to think about what's growing on their toothbrush. Compact enough to slide into a handbag or carry-on, it works just as well at home on your bathroom counter.</p>"
+          }
+        },
+        "desc_item_XgULFe": {
+          "type": "desc_item",
+          "settings": {
+            "heading": "What's in the Box",
+            "content": "<ul><li>1× HimayaHome Portable UV Toothbrush Sanitizer</li><li>1× USB-C Charging Cable</li><li>1× User Manual</li></ul>"
+          }
+        },
         "faq_hmVJj6": {
           "type": "faq",
           "settings": {
@@ -109,6 +126,11 @@
         }
       },
       "block_order": [
+        "desc_item_wbeehB",
+        "desc_item_6PdKze",
+        "desc_item_dr8yHQ",
+        "desc_item_Jp4Nba",
+        "desc_item_XgULFe",
         "faq_hmVJj6",
         "spec_ATciWb",
         "spec_t9Kfq6",
@@ -144,8 +166,7 @@
         "guarantee_3_icon": "🔒",
         "guarantee_3_label": "Secure Checkout",
         "guarantee_3_sub": "SSL encrypted",
-        "trust_text": "✅ CE, FCC & RoHS certified · Independently lab-tested by Guangdong Detection Center of Microbiology",
-        "description": "<p>hello world</p><p>this is a testing device that will show in the main world so tonight let us raise the question. testing the code this is a testing device that will show in the main world so tonight let us raise the question. testing the code this is a testing device that will show in the main world so tonight let us raise the question. testing the code </p><p></p><p>this is a testing device that will show in the main world so tonight let us raise the question. testing the code </p><p>this is a testing device that will show in the main world so tonight let us raise the question. testing the code this is a testing device that will show in the main world so tonight let us raise the question. testing the code this is a testing device that will show in the main world so tonight let us raise the question. testing the code </p>"
+        "trust_text": "✅ CE, FCC & RoHS certified · Independently lab-tested by Guangdong Detection Center of Microbiology"
       }
     },
     "main": {
@@ -220,11 +241,29 @@
         "padding_top": 36,
         "padding_bottom": 12
       }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
     }
   },
   "order": [
-    "related-products",
     "main_product_custom_4RGeVH",
-    "main"
+    "main",
+    "related-products"
   ]
 }
