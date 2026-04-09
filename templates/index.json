@@ -149,7 +149,7 @@
           "type": "product_card",
           "settings": {
             "product": "wall-mounted-uvc-toothbrush-sterilizer",
-            "tag": "Best for Travel",
+            "tag": "Best for Single",
             "tagline": "Travel anywhere. Stay protected.",
             "feature_1": "UVC 99.9% kill rate — hospital grade",
             "feature_2": "One-key automatic start & stop",
@@ -184,11 +184,54 @@
         "section_title": "UV Sanitizers — Choose Your Clean",
         "section_sub": "Two products, one mission: a bacteria-free toothbrush every single day."
       }
+    },
+    "why_uvc_works_Hehixn": {
+      "type": "why-uvc-works",
+      "blocks": {
+        "feature_brx8eG": {
+          "type": "feature",
+          "settings": {
+            "icon_emoji": "🏥",
+            "title": "Hospital-Used Technology",
+            "description": "UVC is the same method used to sterilize surgical equipment and hospital rooms."
+          }
+        },
+        "feature_AnY3g8": {
+          "type": "feature",
+          "settings": {
+            "icon_emoji": "🧬",
+            "title": "DNA-Level Destruction",
+            "description": "UVC breaks the DNA bonds of bacteria, viruses, and mold — not just surfaces."
+          }
+        },
+        "feature_E7XTzn": {
+          "type": "feature",
+          "settings": {
+            "icon_emoji": "✅",
+            "title": "Certified & Tested",
+            "description": "CE, FCC, RoHS certified. Independently tested by Guangdong Detection Center of Microbiology."
+          }
+        }
+      },
+      "block_order": [
+        "feature_brx8eG",
+        "feature_AnY3g8",
+        "feature_E7XTzn"
+      ],
+      "name": "Why UVC Works",
+      "settings": {
+        "badge": "Science-Backed",
+        "heading": "Why UVC Light Works",
+        "intro": "UVC light at 260–270nm penetrates bacterial cell walls and disrupts the DNA structure — permanently destroying the organism's ability to reproduce.",
+        "image": "shopify://shop_images/uvc-sterilization-99percent-science.png",
+        "image_alt": "UVC sterilization technology"
+      }
     }
   },
   "order": [
     "product_annotated_hero_U79QMa",
     "why_uv_iNMf4h",
-    "featured_product_card_ypBDia"
+    "featured_product_card_ypBDia",
+    "why_uvc_works_Hehixn"
   ]
 }
