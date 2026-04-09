@@ -23,7 +23,7 @@
     </p>
 
     <div class="hh-hero__buttons">
-      <a href="#products" class="hh-btn hh-btn--white">See the Products</a>
+      <a href="#products" class="hh-btn hh-btn--white" onclick="event.preventDefault(); document.getElementById('products') && document.getElementById('products').scrollIntoView({ behavior: 'smooth' });">Shop Now</a>
     </div>
 
     <div class="hh-hero__proof">
@@ -218,9 +218,9 @@
     border-color: #fff;
   }
   .hh-btn--white:hover {
-    background: #38bdf8;
+    background: #083d58;
     color: #fff;
-    border-color: #38bdf8;
+    border-color: #083d58;
   }
 
   .hh-hero__proof {
