@@ -652,7 +652,12 @@
 
     <!-- SPECIFICATIONS panel -->
     {%- if has_specs -%}
-      <div id="hh-tab-specs-{{ section.id }}" class="hh-pdp__tab-panel{% unless section.settings.description != blank %} is-active{% endunless %}" role="tabpanel">
+      <div
+        id="hh-tab-specs-{{ section.id }}"
+        class="hh-pdp__tab-panel{% unless has_desc %} is-active{% endunless %}"
+        role="tabpanel"
+        {% if has_desc %}hidden{% endif %}
+      >
         <table class="hh-pdp__specs-table">
           {%- for block in section.blocks -%}
             {%- if block.type == 'spec' and block.settings.spec_key != blank -%}
@@ -668,7 +673,12 @@
 
     <!-- FAQ panel -->
     {%- if has_faq -%}
-      <div id="hh-tab-faq-{{ section.id }}" class="hh-pdp__tab-panel" role="tabpanel">
+      <div
+        id="hh-tab-faq-{{ section.id }}"
+        class="hh-pdp__tab-panel"
+        role="tabpanel"
+        hidden
+      >
         <div class="hh-pdp__faq">
           {%- for block in section.blocks -%}
             {%- if block.type == 'faq' and block.settings.question != blank -%}
@@ -719,15 +729,16 @@
   /* Tab switcher */
   function hhShowTab(btn, sectionId) {
     var tabId = btn.dataset.tab;
-    /* deactivate all tabs & panels in this section */
+    /* deactivate all tab buttons */
     document.querySelectorAll('#hh-tabs-' + sectionId + ' .hh-pdp__tab-btn')
       .forEach(function(b) { b.classList.remove('is-active'); });
+    /* hide all panels — both class and hidden attribute */
     document.querySelectorAll('[id^="hh-tab-"][id$="-' + sectionId + '"]')
-      .forEach(function(p) { p.classList.remove('is-active'); });
-    /* activate selected */
+      .forEach(function(p) { p.classList.remove('is-active'); p.setAttribute('hidden', ''); });
+    /* activate selected button and panel */
     btn.classList.add('is-active');
     var panel = document.getElementById('hh-tab-' + tabId + '-' + sectionId);
-    if (panel) panel.classList.add('is-active');
+    if (panel) { panel.classList.add('is-active'); panel.removeAttribute('hidden'); }
   }
 
   /* FAQ accordion */
