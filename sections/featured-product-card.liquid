@@ -97,6 +97,21 @@
     text-transform: uppercase;
     padding: 4px 10px;
   }
+  .hh-fpc__sale-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    padding: 5px 12px;
+    z-index: 1;
+    box-shadow: 0 2px 6px rgba(192, 57, 43, 0.3);
+  }
 
   /* Card body */
   .hh-fpc__body {
@@ -154,6 +169,7 @@
     display: flex;
     align-items: baseline;
     gap: 8px;
+    flex-wrap: wrap;
     margin-bottom: 4px;
   }
   .hh-fpc__price {
@@ -161,10 +177,29 @@
     font-weight: 700;
     color: #0d1b2a;
   }
+  .hh-fpc__price--compare {
+    font-size: 18px;
+    font-weight: 400;
+    color: #999;
+    text-decoration: line-through;
+  }
   .hh-fpc__price-note {
     font-size: 12px;
     color: #888;
     margin-bottom: 16px;
+  }
+  .hh-fpc__discount-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #0d1b2a;
+    background: rgba(13,27,42,0.06);
+    border-radius: 20px;
+    padding: 3px 9px;
+    width: 100%;
+    margin-top: 4px;
   }
 
   /* CTA buttons */
@@ -258,6 +293,7 @@
           <div class="hh-fpc__card" {{ block.shopify_attributes }}>
 
             <!-- Image — linked to product -->
+            {%- assign fpc_img_variant = block_product.selected_or_first_available_variant -%}
             <a href="{{ block_product.url }}" class="hh-fpc__img-wrap">
               {% if block_product.featured_image %}
                 <img
@@ -273,6 +309,10 @@
               {% if block.settings.tag != blank %}
                 <span class="hh-fpc__tag">{{ block.settings.tag }}</span>
               {% endif %}
+              {%- if fpc_img_variant.compare_at_price > fpc_img_variant.price -%}
+                {%- assign fpc_sale_pct = fpc_img_variant.compare_at_price | minus: fpc_img_variant.price | times: 100 | divided_by: fpc_img_variant.compare_at_price | round -%}
+                <span class="hh-fpc__sale-badge">{{ fpc_sale_pct }}% Off</span>
+              {%- endif -%}
             </a>
 
             <!-- Body -->
@@ -295,7 +335,11 @@
 
               <!-- Footer: price + CTAs -->
               <div class="hh-fpc__footer">
+                {%- assign fpc_variant = block_product.selected_or_first_available_variant -%}
                 <div class="hh-fpc__price-row">
+                  {%- if fpc_variant.compare_at_price > fpc_variant.price -%}
+                    <span class="hh-fpc__price--compare">{{ fpc_variant.compare_at_price | money }}</span>
+                  {%- endif -%}
                   <span class="hh-fpc__price">{{ block_product.price | money }}</span>
                 </div>
                 {% if block.settings.price_note != blank %}

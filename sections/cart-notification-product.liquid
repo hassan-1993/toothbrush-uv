@@ -47,6 +47,28 @@
         {%- if item.selling_plan_allocation != null -%}
           <p class="product-option">{{ item.selling_plan_allocation.selling_plan.name }}</p>
         {%- endif -%}
+
+        {%- if item.original_price != item.final_price -%}
+          <div class="cart-item__discounted-prices">
+            <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+            <s class="cart-item__old-price product-option">{{- item.original_price | money -}}</s>
+            <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+            <strong class="cart-item__final-price product-option">{{ item.final_price | money }}</strong>
+          </div>
+        {%- else -%}
+          <div class="product-option">{{ item.original_price | money }}</div>
+        {%- endif -%}
+
+        {%- if item.line_level_discount_allocations.size > 0 -%}
+          <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
+            {%- for discount in item.line_level_discount_allocations -%}
+              <li class="discounts__discount">
+                {{- 'icon-discount.svg' | inline_asset_content -}}
+                {{ discount.discount_application.title | escape }}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
       </div>
     </div>
   {%- endfor -%}
