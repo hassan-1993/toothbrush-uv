@@ -1,0 +1,1207 @@
+{% comment %}
+  Section: Main Product – Custom
+  HimayaHome — matches the Dawn Mockup product page design.
+  Place in your product template (templates/product.json) to replace or sit
+  alongside Dawn's default main-product section.
+
+  Dynamic (from Shopify product):  title · vendor · price · images · variant · cart form
+  Manual (via Customizer):         subtitle · badge · feature pills · guarantee badges ·
+                                   trust line · description · specifications · FAQ
+{% endcomment %}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign product_form_id = 'hh-product-form-' | append: section.id -%}
+
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+<style>
+/* ═══════════════════════════════════════
+   HH PRODUCT PAGE — scoped to .hh-pdp
+═══════════════════════════════════════ */
+.hh-pdp {
+  padding: 40px 0 60px;
+}
+.hh-pdp__wrap {
+  max-width: var(--page-width, 120rem);
+  margin: 0 auto;
+  padding: 0 2.4rem;
+}
+
+/* ── LAYOUT ───────────────────────────────────── */
+.hh-pdp__layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5.6rem;
+  align-items: flex-start;
+}
+@media (max-width: 900px) {
+  .hh-pdp__layout { grid-template-columns: 1fr; gap: 3.2rem; }
+}
+
+/* ── GALLERY ──────────────────────────────────── */
+.hh-pdp__gallery { display: flex; flex-direction: column; gap: 1.2rem; }
+
+.hh-pdp__main-img {
+  background: #f6f9fb;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: zoom-in;
+}
+.hh-pdp__main-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.hh-pdp__main-img:hover img { transform: scale(1.04); }
+
+/* ── Lightbox ─────────────────────────────── */
+.hh-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.92);
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+.hh-lightbox.is-open { display: flex; }
+.hh-lightbox__img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 2px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  cursor: default;
+  animation: hhLbIn 0.2s ease;
+}
+@keyframes hhLbIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.hh-lightbox__close {
+  position: fixed;
+  top: 2rem;
+  right: 2.4rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 3.2rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  z-index: 1;
+}
+.hh-lightbox__close:hover { opacity: 1; }
+
+.hh-lightbox__nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 2.4rem;
+  width: 5.2rem;
+  height: 5.2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: background 0.2s, opacity 0.2s;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hh-lightbox__nav:hover { background: rgba(255,255,255,0.25); opacity: 1; }
+.hh-lightbox__nav.is-hidden { opacity: 0; pointer-events: none; }
+.hh-lightbox__prev { left: 2.4rem; }
+.hh-lightbox__next { right: 2.4rem; }
+
+.hh-lightbox__dots {
+  position: fixed;
+  bottom: 2.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0;
+  z-index: 1;
+}
+.hh-lb-dot {
+  /* 20×20 px transparent button = comfortable tap area, tight visual spacing */
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+/* Visual dot drawn via ::after so it never blocks neighbour clicks */
+.hh-lb-dot::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  transition: background 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+.hh-lb-dot.is-active::after {
+  background: #fff;
+  transform: scale(1.3);
+}
+.hh-lb-dot:not(.is-active):hover::after {
+  background: rgba(255,255,255,0.65);
+}
+
+.hh-pdp__badge {
+  position: absolute;
+  top: 1.6rem;
+  right: 1.6rem;
+  background: rgb(var(--color-button));
+  color: rgb(var(--color-button-text));
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  padding: 0.5rem 1.2rem;
+}
+
+.hh-pdp__thumbs {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.8rem;
+}
+.hh-pdp__thumb {
+  aspect-ratio: 1 / 1;
+  background: #f6f9fb;
+  border: 0.2rem solid transparent;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
+}
+.hh-pdp__thumb.is-active,
+.hh-pdp__thumb:hover { border-color: rgb(var(--color-button)); }
+.hh-pdp__thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ── FORM COLUMN ──────────────────────────────── */
+.hh-pdp__form {}
+
+.hh-pdp__vendor {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.5);
+  margin-bottom: 0.6rem;
+}
+.hh-pdp__title {
+  font-size: clamp(2.2rem, 3vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.05rem;
+  line-height: 1.2;
+  margin-bottom: 0.8rem;
+  color: rgb(var(--color-foreground));
+}
+.hh-pdp__subtitle {
+  font-size: 1.4rem;
+  color: rgb(var(--color-button));
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+.hh-pdp__blurb {
+  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.65);
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+
+/* Price row */
+.hh-pdp__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  padding: 1.8rem 0;
+  margin-bottom: 2.4rem;
+}
+.hh-pdp__price {
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgb(var(--color-foreground));
+}
+.hh-pdp__price-note {
+  font-size: 1.3rem;
+  color: rgba(var(--color-foreground), 0.5);
+}
+
+/* Feature pills */
+.hh-pdp__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 2.8rem;
+}
+.hh-pdp__pill {
+  background: rgba(var(--color-button), 0.08);
+  color: rgb(var(--color-button));
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.05rem;
+  padding: 0.6rem 1.4rem;
+  white-space: nowrap;
+}
+
+/* Quantity */
+.hh-pdp__qty-label {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+.hh-pdp__qty {
+  display: flex;
+  align-items: center;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.15);
+  width: fit-content;
+  margin-bottom: 1.6rem;
+}
+.hh-pdp__qty button {
+  background: none;
+  border: none;
+  width: 4.4rem;
+  height: 4.4rem;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: rgb(var(--color-foreground));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hh-pdp__qty input {
+  width: 5.2rem;
+  height: 4.4rem;
+  border: none;
+  text-align: center;
+  font-size: 1.5rem;
+  font-family: inherit;
+  background: transparent;
+  color: rgb(var(--color-foreground));
+}
+
+/* Buttons */
+.hh-pdp__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2.4rem;
+}
+
+/* Guarantee row */
+.hh-pdp__guarantees {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  padding-top: 2rem;
+}
+.hh-pdp__guarantee {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground), 0.6);
+}
+.hh-pdp__guarantee-icon { font-size: 1.8rem; }
+.hh-pdp__guarantee strong { color: rgb(var(--color-foreground)); display: block; }
+
+/* Trust line */
+.hh-pdp__trust {
+  font-size: 1.3rem;
+  color: rgba(var(--color-foreground), 0.5);
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  padding-top: 1.6rem;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════
+   PRODUCT TABS SECTION
+═══════════════════════════════════════ */
+.hh-pdp-tabs {
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  padding-bottom: 6rem;
+}
+.hh-pdp-tabs__wrap {
+  max-width: var(--page-width, 120rem);
+  margin: 0 auto;
+  padding: 0 2.4rem;
+}
+
+.hh-pdp__tab-nav {
+  display: flex;
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  margin-bottom: 4rem;
+  gap: 0;
+  overflow-x: auto;
+}
+.hh-pdp__tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 0.3rem solid transparent;
+  font-family: inherit;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 1.4rem 2.8rem;
+  color: rgba(var(--color-foreground), 0.45);
+  transition: color 0.2s, border-color 0.2s;
+  letter-spacing: 0.03rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.hh-pdp__tab-btn.is-active {
+  color: rgb(var(--color-button));
+  border-bottom-color: rgb(var(--color-button));
+}
+
+.hh-pdp__tab-panel { display: none; }
+.hh-pdp__tab-panel.is-active { display: block; }
+
+/* Description */
+.hh-pdp__description { max-width: 76rem; }
+
+/* Each description block */
+.hh-pdp__desc-block { margin-bottom: 2.8rem; }
+.hh-pdp__desc-block:last-child { margin-bottom: 0; }
+
+.hh-pdp__desc-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: rgb(var(--color-foreground));
+  margin: 0 0 1.2rem;
+}
+.hh-pdp__desc-body p {
+  font-size: 1.5rem;
+  color: #444444;
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+}
+.hh-pdp__desc-body p:last-child { margin-bottom: 0; }
+.hh-pdp__desc-body strong { font-weight: 700; color: rgb(var(--color-foreground)); }
+.hh-pdp__desc-body em { font-style: italic; }
+.hh-pdp__desc-body ul,
+.hh-pdp__desc-body ol { padding-left: 2rem; margin-bottom: 1.2rem; }
+.hh-pdp__desc-body li { font-size: 1.5rem; color: #444444; line-height: 1.7; margin-bottom: 0.4rem; }
+
+/* Specs table */
+.hh-pdp__specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.4rem;
+}
+.hh-pdp__specs-table tr:nth-child(even) {
+  background: rgba(var(--color-foreground), 0.03);
+}
+.hh-pdp__specs-table td {
+  padding: 1.4rem 1.6rem;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.08);
+}
+.hh-pdp__specs-table td:first-child {
+  font-weight: 700;
+  width: 36%;
+  color: rgb(var(--color-foreground));
+}
+
+/* FAQ */
+.hh-pdp__faq { max-width: 72rem; }
+.hh-pdp__faq-item {
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+}
+.hh-pdp__faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: left;
+  padding: 1.8rem 0;
+  cursor: pointer;
+  color: rgb(var(--color-foreground));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.6rem;
+}
+.hh-pdp__faq-icon {
+  font-size: 2rem;
+  color: rgb(var(--color-button));
+  flex-shrink: 0;
+  transition: transform 0.2s;
+  line-height: 1;
+}
+.hh-pdp__faq-item.is-open .hh-pdp__faq-icon { transform: rotate(45deg); }
+.hh-pdp__faq-a {
+  font-size: 1.4rem;
+  color: rgba(var(--color-foreground), 0.65);
+  line-height: 1.8;
+  padding: 0 0 1.8rem;
+  display: none;
+}
+.hh-pdp__faq-item.is-open .hh-pdp__faq-a { display: block; }
+
+@media (max-width: 600px) {
+  .hh-pdp__thumbs { grid-template-columns: repeat(4, 1fr); }
+  .hh-pdp__tab-btn { padding: 1.2rem 1.4rem; font-size: 1.3rem; }
+  .hh-pdp__guarantees { gap: 1.2rem; }
+}
+
+/* ── "Buy it now" — outline style ── */
+.hh-pdp__buttons .shopify-payment-button__button--unbranded {
+  background-color: transparent !important;
+  color: rgb(var(--color-button)) !important;
+  border: 2px solid rgb(var(--color-button)) !important;
+  box-shadow: none !important;
+}
+.hh-pdp__buttons .shopify-payment-button__button--unbranded::before,
+.hh-pdp__buttons .shopify-payment-button__button--unbranded::after {
+  display: none !important;
+}
+.hh-pdp__buttons .shopify-payment-button__button--unbranded:hover,
+.hh-pdp__buttons .shopify-payment-button__button--unbranded:hover:not([disabled]) {
+  background-color: rgb(var(--color-button)) !important;
+  color: rgb(var(--color-button-text)) !important;
+}
+</style>
+
+<!-- ══════════════════════════════════════
+     PRODUCT MAIN SECTION
+══════════════════════════════════════ -->
+<section class="hh-pdp">
+  <div class="hh-pdp__wrap">
+    <div class="hh-pdp__layout">
+
+      <!-- LEFT: GALLERY -->
+      <div class="hh-pdp__gallery" id="hh-gallery-{{ section.id }}">
+
+        <!-- Main featured image -->
+        <div class="hh-pdp__main-img" title="Click to zoom" role="button" tabindex="0">
+          {%- if product.featured_image -%}
+            <img
+              id="hh-main-img-{{ section.id }}"
+              src="{{ product.featured_image | image_url: width: 1000 }}"
+              alt="{{ product.featured_image.alt | default: product.title | escape }}"
+              width="1000"
+              height="1000"
+              loading="eager"
+            >
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag }}
+          {%- endif -%}
+
+          {%- if section.settings.badge_label != blank -%}
+            <span class="hh-pdp__badge">{{ section.settings.badge_label }}</span>
+          {%- endif -%}
+        </div>
+
+        <!-- Thumbnails -->
+        {%- if product.images.size > 1 -%}
+          <div class="hh-pdp__thumbs">
+            {%- for image in product.images limit: 6 -%}
+              <div
+                class="hh-pdp__thumb{% if forloop.first %} is-active{% endif %}"
+                data-src="{{ image | image_url: width: 1000 }}"
+                data-alt="{{ image.alt | default: product.title | escape }}"
+                onclick="hhSwitchImg(this, '{{ section.id }}')"
+              >
+                <img
+                  src="{{ image | image_url: width: 200 }}"
+                  alt="{{ image.alt | default: product.title | escape }}"
+                  width="200"
+                  height="200"
+                  loading="lazy"
+                >
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+      </div>
+
+      <!-- RIGHT: PRODUCT FORM -->
+      <div class="hh-pdp__form">
+
+        <!-- Vendor -->
+        <p class="hh-pdp__vendor">{{ product.vendor }}</p>
+
+        <!-- Title -->
+        <h1 class="hh-pdp__title">{{ product.title }}</h1>
+
+        <!-- Subtitle (manual) -->
+        {%- if section.settings.subtitle != blank -%}
+          <p class="hh-pdp__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+
+        <!-- Short product blurb (manual) -->
+        {%- if section.settings.blurb != blank -%}
+          <p class="hh-pdp__blurb">{{ section.settings.blurb }}</p>
+        {%- endif -%}
+
+        <!-- Price row — pulled from product -->
+        <div class="hh-pdp__price-row">
+          <div class="hh-pdp__price">
+            {{ current_variant.price | money }}
+          </div>
+          <div class="hh-pdp__price-note">
+            {%- if section.settings.price_note != blank -%}
+              {{ section.settings.price_note }}
+            {%- else -%}
+              {%- if cart.taxes_included -%}Taxes included{%- endif -%}
+              {%- if product.selected_or_first_available_variant.requires_shipping and section.settings.show_free_shipping -%}
+                {%- if cart.taxes_included %} · {%- endif -%}Free shipping
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+        </div>
+
+        <!-- Feature pills (manual) -->
+        {%- assign has_pills = false -%}
+        {%- for i in (1..6) -%}
+          {%- assign pill_key = 'pill_' | append: i -%}
+          {%- if section.settings[pill_key] != blank -%}{%- assign has_pills = true -%}{%- endif -%}
+        {%- endfor -%}
+        {%- if has_pills -%}
+          <div class="hh-pdp__pills">
+            {%- for i in (1..6) -%}
+              {%- assign pill_key = 'pill_' | append: i -%}
+              {%- if section.settings[pill_key] != blank -%}
+                <span class="hh-pdp__pill">{{ section.settings[pill_key] }}</span>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        <!-- Product form — quantity + buttons -->
+        <product-form
+          class="product-form"
+          data-hide-errors="false"
+          data-section-id="{{ section.id }}"
+        >
+          <div class="product-form__error-message-wrapper" role="alert" hidden>
+            <span class="svg-wrapper">{{- 'icon-error.svg' | inline_asset_content -}}</span>
+            <span class="product-form__error-message"></span>
+          </div>
+
+          {%- form 'product', product,
+            id: product_form_id,
+            class: 'form',
+            novalidate: 'novalidate',
+            data-type: 'add-to-cart-form'
+          -%}
+            <input
+              type="hidden"
+              name="id"
+              value="{{ current_variant.id }}"
+              class="product-variant-id"
+              {% if current_variant.available == false %}disabled{% endif %}
+            >
+
+            <!-- Quantity -->
+            <label class="hh-pdp__qty-label" for="hh-qty-{{ section.id }}">Quantity</label>
+            <div class="hh-pdp__qty">
+              <button type="button" onclick="hhAdjustQty(-1,'{{ section.id }}')">−</button>
+              <input
+                type="number"
+                id="hh-qty-{{ section.id }}"
+                name="quantity"
+                value="1"
+                min="1"
+                aria-label="Quantity"
+                readonly
+              >
+              <button type="button" onclick="hhAdjustQty(1,'{{ section.id }}')">+</button>
+            </div>
+
+            <!-- CTA buttons -->
+            <div class="hh-pdp__buttons product-form__buttons">
+              <button
+                id="hh-add-to-cart-{{ section.id }}"
+                type="submit"
+                name="add"
+                class="product-form__submit button button--full-width button--primary"
+                {% if current_variant.available == false %}disabled{% endif %}
+              >
+                <span>
+                  {%- if current_variant.available == false -%}
+                    {{ 'products.product.sold_out' | t }}
+                  {%- else -%}
+                    {{ 'products.product.add_to_cart' | t }}
+                  {%- endif -%}
+                </span>
+                {%- render 'loading-spinner' -%}
+              </button>
+
+              {%- if section.settings.show_buy_it_now -%}
+                {{ form | payment_button }}
+              {%- endif -%}
+            </div>
+          {%- endform -%}
+        </product-form>
+
+        <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+        <!-- Guarantee badges (manual) -->
+        {%- assign has_guarantees = false -%}
+        {%- for i in (1..3) -%}
+          {%- assign g_label = 'guarantee_' | append: i | append: '_label' -%}
+          {%- if section.settings[g_label] != blank -%}{%- assign has_guarantees = true -%}{%- endif -%}
+        {%- endfor -%}
+        {%- if has_guarantees -%}
+          <div class="hh-pdp__guarantees">
+            {%- for i in (1..3) -%}
+              {%- assign g_icon  = 'guarantee_' | append: i | append: '_icon' -%}
+              {%- assign g_label = 'guarantee_' | append: i | append: '_label' -%}
+              {%- assign g_sub   = 'guarantee_' | append: i | append: '_sub' -%}
+              {%- if section.settings[g_label] != blank -%}
+                <div class="hh-pdp__guarantee">
+                  {%- if section.settings[g_icon] != blank -%}
+                    <span class="hh-pdp__guarantee-icon">{{ section.settings[g_icon] }}</span>
+                  {%- endif -%}
+                  <span>
+                    <strong>{{ section.settings[g_label] }}</strong>
+                    {%- if section.settings[g_sub] != blank -%}{{ section.settings[g_sub] }}{%- endif -%}
+                  </span>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        <!-- Trust / certification line (manual) -->
+        {%- if section.settings.trust_text != blank -%}
+          <p class="hh-pdp__trust">{{ section.settings.trust_text }}</p>
+        {%- endif -%}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PRODUCT TABS
+══════════════════════════════════════ -->
+{%- assign has_desc = false -%}
+{%- for block in section.blocks -%}
+  {%- if block.type == 'desc_item' -%}{%- assign has_desc = true -%}{%- endif -%}
+{%- endfor -%}
+{%- assign has_specs = false -%}
+{%- for block in section.blocks -%}
+  {%- if block.type == 'spec' and block.settings.spec_key != blank -%}{%- assign has_specs = true -%}{%- endif -%}
+{%- endfor -%}
+{%- assign has_faq = false -%}
+{%- for block in section.blocks -%}
+  {%- if block.type == 'faq' and block.settings.question != blank -%}{%- assign has_faq = true -%}{%- endif -%}
+{%- endfor -%}
+
+<section class="hh-pdp-tabs">
+  <div class="hh-pdp-tabs__wrap">
+
+    <!-- Tab nav -->
+    <div class="hh-pdp__tab-nav" role="tablist" id="hh-tabs-{{ section.id }}">
+      {%- if has_desc -%}
+        <button
+          class="hh-pdp__tab-btn is-active"
+          role="tab"
+          data-tab="description"
+          onclick="hhShowTab(this,'{{ section.id }}')"
+        >Description</button>
+      {%- endif -%}
+
+      {%- if has_specs -%}
+        <button
+          class="hh-pdp__tab-btn{% unless has_desc %} is-active{% endunless %}"
+          role="tab"
+          data-tab="specs"
+          onclick="hhShowTab(this,'{{ section.id }}')"
+        >Specifications</button>
+      {%- endif -%}
+
+      {%- if has_faq -%}
+        <button
+          class="hh-pdp__tab-btn"
+          role="tab"
+          data-tab="faq"
+          onclick="hhShowTab(this,'{{ section.id }}')"
+        >FAQ</button>
+      {%- endif -%}
+    </div>
+
+    <!-- DESCRIPTION panel — built from desc_item blocks -->
+    {%- if has_desc -%}
+      <div id="hh-tab-description-{{ section.id }}" class="hh-pdp__tab-panel is-active" role="tabpanel">
+        <div class="hh-pdp__description">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'desc_item' -%}
+              <div class="hh-pdp__desc-block" {{ block.shopify_attributes }}>
+                {%- if block.settings.heading != blank -%}
+                  <h3 class="hh-pdp__desc-heading">{{ block.settings.heading }}</h3>
+                {%- endif -%}
+                {%- if block.settings.content != blank -%}
+                  <div class="hh-pdp__desc-body">{{ block.settings.content }}</div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <!-- SPECIFICATIONS panel -->
+    {%- if has_specs -%}
+      <div
+        id="hh-tab-specs-{{ section.id }}"
+        class="hh-pdp__tab-panel{% unless has_desc %} is-active{% endunless %}"
+        role="tabpanel"
+        {% if has_desc %}hidden{% endif %}
+      >
+        <table class="hh-pdp__specs-table">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'spec' and block.settings.spec_key != blank -%}
+              <tr {{ block.shopify_attributes }}>
+                <td>{{ block.settings.spec_key }}</td>
+                <td>{{ block.settings.spec_value }}</td>
+              </tr>
+            {%- endif -%}
+          {%- endfor -%}
+        </table>
+      </div>
+    {%- endif -%}
+
+    <!-- FAQ panel -->
+    {%- if has_faq -%}
+      <div
+        id="hh-tab-faq-{{ section.id }}"
+        class="hh-pdp__tab-panel"
+        role="tabpanel"
+        hidden
+      >
+        <div class="hh-pdp__faq">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'faq' and block.settings.question != blank -%}
+              <div class="hh-pdp__faq-item" {{ block.shopify_attributes }}>
+                <button
+                  class="hh-pdp__faq-q"
+                  onclick="hhToggleFaq(this)"
+                  aria-expanded="false"
+                >
+                  {{ block.settings.question }}
+                  <span class="hh-pdp__faq-icon" aria-hidden="true">+</span>
+                </button>
+                <p class="hh-pdp__faq-a">{{ block.settings.answer }}</p>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<!-- Lightbox overlay -->
+<div class="hh-lightbox" id="hh-lightbox-{{ section.id }}" role="dialog" aria-modal="true" aria-label="Product image zoom">
+  <button class="hh-lightbox__close" aria-label="Close">&times;</button>
+  <button class="hh-lightbox__nav hh-lightbox__prev" aria-label="Previous image">&#8592;</button>
+  <img class="hh-lightbox__img" src="" alt="">
+  <button class="hh-lightbox__nav hh-lightbox__next" aria-label="Next image">&#8594;</button>
+  <div class="hh-lightbox__dots" id="hh-lb-dots-{{ section.id }}"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     INLINE SCRIPTS (tab switching · qty · gallery · FAQ)
+══════════════════════════════════════ -->
+<script>
+  /* Gallery thumbnail switch */
+  function hhSwitchImg(thumb, sectionId) {
+    var mainEl = document.getElementById('hh-main-img-' + sectionId);
+    if (mainEl) {
+      mainEl.src = thumb.dataset.src;
+      mainEl.alt = thumb.dataset.alt;
+    }
+    document.querySelectorAll('#hh-gallery-' + sectionId + ' .hh-pdp__thumb')
+      .forEach(function(t) { t.classList.remove('is-active'); });
+    thumb.classList.add('is-active');
+  }
+
+  /* Quantity adjuster */
+  function hhAdjustQty(delta, sectionId) {
+    var input = document.getElementById('hh-qty-' + sectionId);
+    if (!input) return;
+    var val = parseInt(input.value, 10) || 1;
+    input.value = Math.max(1, val + delta);
+  }
+
+  /* Tab switcher */
+  function hhShowTab(btn, sectionId) {
+    var tabId = btn.dataset.tab;
+    /* deactivate all tab buttons */
+    document.querySelectorAll('#hh-tabs-' + sectionId + ' .hh-pdp__tab-btn')
+      .forEach(function(b) { b.classList.remove('is-active'); });
+    /* hide all panels — both class and hidden attribute */
+    document.querySelectorAll('[id^="hh-tab-"][id$="-' + sectionId + '"]')
+      .forEach(function(p) { p.classList.remove('is-active'); p.setAttribute('hidden', ''); });
+    /* activate selected button and panel */
+    btn.classList.add('is-active');
+    var panel = document.getElementById('hh-tab-' + tabId + '-' + sectionId);
+    if (panel) { panel.classList.add('is-active'); panel.removeAttribute('hidden'); }
+  }
+
+  /* FAQ accordion */
+  function hhToggleFaq(btn) {
+    var item = btn.closest('.hh-pdp__faq-item');
+    var isOpen = item.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', isOpen);
+  }
+
+  /* Lightbox with image navigation */
+  (function() {
+    var sectionId = '{{ section.id }}';
+    var lb       = document.getElementById('hh-lightbox-' + sectionId);
+    if (!lb) return;
+
+    var lbImg    = lb.querySelector('.hh-lightbox__img');
+    var lbClose  = lb.querySelector('.hh-lightbox__close');
+    var lbPrev   = lb.querySelector('.hh-lightbox__prev');
+    var lbNext   = lb.querySelector('.hh-lightbox__next');
+    var lbDots   = document.getElementById('hh-lb-dots-' + sectionId);
+    var mainImg  = document.getElementById('hh-main-img-' + sectionId);
+    var mainWrap = mainImg && mainImg.closest('.hh-pdp__main-img');
+    var thumbs   = Array.from(document.querySelectorAll('#hh-gallery-' + sectionId + ' .hh-pdp__thumb'));
+
+    /* Build image list from thumbs (full-res src) or fall back to main image */
+    var images = thumbs.length
+      ? thumbs.map(function(t) { return { src: t.dataset.src, alt: t.dataset.alt || '' }; })
+      : (mainImg ? [{ src: mainImg.src, alt: mainImg.alt }] : []);
+
+    var currentIndex = 0;
+
+    /* Build dots */
+    function buildDots() {
+      lbDots.innerHTML = '';
+      if (images.length <= 1) return;
+      images.forEach(function(_, i) {
+        var dot = document.createElement('button');
+        dot.className = 'hh-lb-dot' + (i === 0 ? ' is-active' : '');
+        dot.setAttribute('aria-label', 'Image ' + (i + 1));
+        dot.addEventListener('click', function(e) { e.stopPropagation(); goTo(i); });
+        lbDots.appendChild(dot);
+      });
+    }
+
+    function updateUI() {
+      lbImg.src = images[currentIndex].src;
+      lbImg.alt = images[currentIndex].alt;
+      /* nav arrows */
+      lbPrev.classList.toggle('is-hidden', currentIndex === 0);
+      lbNext.classList.toggle('is-hidden', currentIndex === images.length - 1);
+      /* dots */
+      Array.from(lbDots.querySelectorAll('.hh-lb-dot')).forEach(function(d, i) {
+        d.classList.toggle('is-active', i === currentIndex);
+      });
+    }
+
+    function goTo(index) {
+      currentIndex = Math.max(0, Math.min(images.length - 1, index));
+      updateUI();
+    }
+
+    function openLightbox(startIndex) {
+      currentIndex = startIndex || 0;
+      buildDots();
+      updateUI();
+      lb.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lb.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    /* Open from main image click only — start at whichever thumb is active */
+    if (mainWrap) {
+      mainWrap.addEventListener('click', function() {
+        var activeThumbIdx = thumbs.findIndex(function(t) { return t.classList.contains('is-active'); });
+        openLightbox(activeThumbIdx >= 0 ? activeThumbIdx : 0);
+      });
+    }
+
+    lbPrev.addEventListener('click', function(e) { e.stopPropagation(); goTo(currentIndex - 1); });
+    lbNext.addEventListener('click', function(e) { e.stopPropagation(); goTo(currentIndex + 1); });
+
+    lbClose.addEventListener('click', function(e) { e.stopPropagation(); closeLightbox(); });
+    lb.addEventListener('click', function(e) { if (e.target === lb) closeLightbox(); });
+
+    document.addEventListener('keydown', function(e) {
+      if (!lb.classList.contains('is-open')) return;
+      if (e.key === 'Escape')      closeLightbox();
+      if (e.key === 'ArrowLeft')   goTo(currentIndex - 1);
+      if (e.key === 'ArrowRight')  goTo(currentIndex + 1);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product Page — Custom",
+  "tag": "section",
+  "class": "hh-pdp-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product info (pulled from Shopify)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Title, vendor, price, and images are read from the product automatically."
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle / tagline",
+      "default": "Travel-Ready UVC Sterilization — Kills 99.9% of Bacteria"
+    },
+    {
+      "type": "textarea",
+      "id": "blurb",
+      "label": "Product blurb (shown above price)",
+      "info": "2–3 sentences about the product itself — what it is, what it does, key numbers. Not marketing copy.",
+      "default": "A compact UV sterilization case that kills 99.9% of bacteria on your toothbrush bristles in a 99-second automatic cycle. Powered by a 1500 mAh battery (up to 15 days per charge), rechargeable via USB-C, and fitted with drainage outlets to keep the interior dry between uses. Max toothbrush handle length: 15.5 cm."
+    },
+    {
+      "type": "text",
+      "id": "badge_label",
+      "label": "Gallery badge label",
+      "default": "Best for Travel"
+    },
+    {
+      "type": "text",
+      "id": "price_note",
+      "label": "Price note (below price)",
+      "placeholder": "Taxes included · Free shipping"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_free_shipping",
+      "label": "Auto-show 'Free shipping' in price note",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_buy_it_now",
+      "label": "Show 'Buy it now' button",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Feature pills"
+    },
+    {
+      "type": "text",
+      "id": "pill_1",
+      "label": "Pill 1",
+      "default": "99.9% Bacteria Killed"
+    },
+    {
+      "type": "text",
+      "id": "pill_2",
+      "label": "Pill 2",
+      "default": "1500 mAh Battery"
+    },
+    {
+      "type": "text",
+      "id": "pill_3",
+      "label": "Pill 3",
+      "default": "~15 Days Battery Life"
+    },
+    {
+      "type": "text",
+      "id": "pill_4",
+      "label": "Pill 4",
+      "default": "USB-C Charging"
+    },
+    {
+      "type": "text",
+      "id": "pill_5",
+      "label": "Pill 5",
+      "default": "Travel Size"
+    },
+    {
+      "type": "text",
+      "id": "pill_6",
+      "label": "Pill 6"
+    },
+    {
+      "type": "header",
+      "content": "Guarantee badges"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_1_icon",
+      "label": "Badge 1 — icon (emoji)",
+      "default": "🚚"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_1_label",
+      "label": "Badge 1 — label",
+      "default": "Free Shipping"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_1_sub",
+      "label": "Badge 1 — sub-text",
+      "default": "on all orders"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_2_icon",
+      "label": "Badge 2 — icon (emoji)",
+      "default": "↩️"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_2_label",
+      "label": "Badge 2 — label",
+      "default": "30-Day Returns"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_2_sub",
+      "label": "Badge 2 — sub-text",
+      "default": "no questions asked"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_3_icon",
+      "label": "Badge 3 — icon (emoji)",
+      "default": "🔒"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_3_label",
+      "label": "Badge 3 — label",
+      "default": "Secure Checkout"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_3_sub",
+      "label": "Badge 3 — sub-text",
+      "default": "SSL encrypted"
+    },
+    {
+      "type": "header",
+      "content": "Trust & certification"
+    },
+    {
+      "type": "text",
+      "id": "trust_text",
+      "label": "Certification / trust line",
+      "default": "✅ CE, FCC & RoHS certified · Independently lab-tested by Guangdong Detection Center of Microbiology"
+    },
+  ],
+  "blocks": [
+    {
+      "type": "desc_item",
+      "name": "Description section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Section heading",
+          "info": "Displays as a bold title. Leave blank for a paragraph-only block.",
+          "default": "A Bacteria-Free Brush. Every Time."
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Paragraph text",
+          "default": "<p>Describe this section of the product here.</p>"
+        }
+      ]
+    },
+    {
+      "type": "spec",
+      "name": "Specification row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "spec_key",
+          "label": "Property name",
+          "default": "Battery Capacity"
+        },
+        {
+          "type": "text",
+          "id": "spec_value",
+          "label": "Value",
+          "default": "1500 mAh"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How long does one cycle take?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "The sterilization cycle runs for approximately 90–99 seconds and stops automatically."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Page — Custom",
+      "blocks": [
+        { "type": "spec", "settings": { "spec_key": "Sterilization Technology", "spec_value": "UVC Light (260–270nm)" } },
+        { "type": "spec", "settings": { "spec_key": "Sterilization Rate", "spec_value": "99.9% bacteria, viruses, and mold" } },
+        { "type": "spec", "settings": { "spec_key": "Battery Capacity", "spec_value": "1500 mAh lithium" } },
+        { "type": "spec", "settings": { "spec_key": "Battery Life", "spec_value": "~15 days per charge" } },
+        { "type": "spec", "settings": { "spec_key": "Charging", "spec_value": "USB Type-C" } },
+        { "type": "spec", "settings": { "spec_key": "Max Toothbrush Length", "spec_value": "15.5 cm" } },
+        { "type": "spec", "settings": { "spec_key": "Certifications", "spec_value": "CE, FCC, RoHS" } },
+        { "type": "faq", "settings": { "question": "How long does one sterilization cycle take?", "answer": "The standard cycle runs for approximately 90–99 seconds and stops automatically — no manual intervention needed." } },
+        { "type": "faq", "settings": { "question": "Is it safe to use around children?", "answer": "Yes. The UVC light only activates when the cover is fully closed, preventing any UV exposure." } },
+        { "type": "faq", "settings": { "question": "What toothbrush sizes does it fit?", "answer": "Most standard and electric toothbrushes. The handle must not exceed 15.5 cm." } },
+        { "type": "faq", "settings": { "question": "Is the unit waterproof?", "answer": "It has drainage outlets to handle moisture, but is not designed to be submerged in water." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

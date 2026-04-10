@@ -215,6 +215,25 @@ product-info {
   letter-spacing: 0.1rem;
 }
 
+/* "Buy it now" unbranded button — outline style to match featured card secondary */
+.shopify-payment-button__button--unbranded {
+  background-color: transparent !important;
+  color: rgb(var(--color-button)) !important;
+  border: 2px solid rgb(var(--color-button)) !important;
+  box-shadow: none !important;
+}
+
+.shopify-payment-button__button--unbranded::before,
+.shopify-payment-button__button--unbranded::after {
+  display: none !important;
+}
+
+.shopify-payment-button__button--unbranded:hover,
+.shopify-payment-button__button--unbranded:hover:not([disabled]) {
+  background-color: rgb(var(--color-button)) !important;
+  color: rgb(var(--color-button-text)) !important;
+}
+
 /* Product info */
 
 .product__info-container > * + * {

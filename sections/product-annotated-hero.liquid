@@ -23,7 +23,7 @@
     </p>
 
     <div class="hh-hero__buttons">
-      <a href="#products" class="hh-btn hh-btn--white">See the Products</a>
+      <a href="#products" class="hh-btn hh-btn--white" onclick="event.preventDefault(); document.getElementById('products') && document.getElementById('products').scrollIntoView({ behavior: 'smooth' });">Shop Now</a>
     </div>
 
     <div class="hh-hero__proof">
@@ -65,58 +65,58 @@
     {% for block in section.blocks limit: 5 %}
     {% case forloop.index %}
       {% when 1 %}
-        <!-- Callout 1: top left -->
+        <!-- Callout 1: top left — bubble at outer edge, dot points RIGHT toward product -->
         <div class="hh-pin hh-pin--top-left" {{ block.shopify_attributes }}>
-          <div class="hh-pin__dot"></div>
-          <div class="hh-pin__line" style="width:36px;"></div>
           <div class="hh-pin__bubble">
             <strong>{{ block.settings.title }}</strong>
             <span>{{ block.settings.subtitle }}</span>
           </div>
+          <div class="hh-pin__line" style="width:36px;"></div>
+          <div class="hh-pin__dot"></div>
         </div>
 
       {% when 2 %}
-        <!-- Callout 2: mid left -->
+        <!-- Callout 2: mid left — bubble at outer edge, dot points RIGHT toward product -->
         <div class="hh-pin hh-pin--mid-left" {{ block.shopify_attributes }}>
-          <div class="hh-pin__dot"></div>
-          <div class="hh-pin__line" style="width:48px;"></div>
           <div class="hh-pin__bubble">
             <strong>{{ block.settings.title }}</strong>
             <span>{{ block.settings.subtitle }}</span>
           </div>
+          <div class="hh-pin__line" style="width:48px;"></div>
+          <div class="hh-pin__dot"></div>
         </div>
 
       {% when 3 %}
-        <!-- Callout 3: bottom left -->
+        <!-- Callout 3: bottom left — bubble at outer edge, dot points RIGHT toward product -->
         <div class="hh-pin hh-pin--bot-left" {{ block.shopify_attributes }}>
-          <div class="hh-pin__dot"></div>
-          <div class="hh-pin__line" style="width:36px;"></div>
           <div class="hh-pin__bubble">
             <strong>{{ block.settings.title }}</strong>
             <span>{{ block.settings.subtitle }}</span>
           </div>
+          <div class="hh-pin__line" style="width:36px;"></div>
+          <div class="hh-pin__dot"></div>
         </div>
 
       {% when 4 %}
-        <!-- Callout 4: top right -->
+        <!-- Callout 4: top right — dot points LEFT toward product, bubble at outer edge -->
         <div class="hh-pin hh-pin--top-right" {{ block.shopify_attributes }}>
+          <div class="hh-pin__dot"></div>
+          <div class="hh-pin__line" style="width:40px;"></div>
           <div class="hh-pin__bubble">
             <strong>{{ block.settings.title }}</strong>
             <span>{{ block.settings.subtitle }}</span>
           </div>
-          <div class="hh-pin__line" style="width:40px;"></div>
-          <div class="hh-pin__dot"></div>
         </div>
 
       {% when 5 %}
-        <!-- Callout 5: bottom right -->
+        <!-- Callout 5: bottom right — dot points LEFT toward product, bubble at outer edge -->
         <div class="hh-pin hh-pin--bot-right" {{ block.shopify_attributes }}>
+          <div class="hh-pin__dot"></div>
+          <div class="hh-pin__line" style="width:36px;"></div>
           <div class="hh-pin__bubble">
             <strong>{{ block.settings.title }}</strong>
             <span>{{ block.settings.subtitle }}</span>
           </div>
-          <div class="hh-pin__line" style="width:36px;"></div>
-          <div class="hh-pin__dot"></div>
         </div>
     {% endcase %}
   {% endfor %}
@@ -162,9 +162,10 @@
     margin-bottom: 20px;
   }
   .hh-hero__what-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: #38bdf8;
+    display: block !important;
+    width: 7px !important; height: 7px !important;
+    border-radius: 50% !important;
+    background: #38bdf8 !important;
     flex-shrink: 0;
     animation: hhPulse 1.8s ease-in-out infinite;
   }
@@ -217,9 +218,9 @@
     border-color: #fff;
   }
   .hh-btn--white:hover {
-    background: #38bdf8;
+    background: #083d58;
     color: #fff;
-    border-color: #38bdf8;
+    border-color: #083d58;
   }
 
   .hh-hero__proof {
@@ -318,12 +319,12 @@
     color: rgba(255,255,255,0.5);
   }
 
-  /* Left pins: dot → line → bubble (dot nearest the product on the right) */
+  /* Left pins: bubble(outer) → line → dot(inner, points toward product) */
   .hh-pin--top-left { top: 12%; left: 2%; flex-direction: row; }
   .hh-pin--mid-left { top: 44%; left: 0%;  flex-direction: row; }
   .hh-pin--bot-left { bottom: 16%; left: 4%; flex-direction: row; }
 
-  /* Right pins: bubble → line → dot (dot nearest the product on the left) */
+  /* Right pins: dot(inner, points toward product) → line → bubble(outer) */
   .hh-pin--top-right { top: 18%; right: 2%; flex-direction: row; }
   .hh-pin--bot-right { bottom: 22%; right: 2%; flex-direction: row; }
 

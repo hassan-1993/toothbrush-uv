@@ -1,1 +1,237 @@
-{"sections":{"product_annotated_hero_U79QMa":{"type":"product-annotated-hero","blocks":{"callout_MGnzf6":{"type":"callout","settings":{"title":"UVC Light Beam","subtitle":"Kills 99.9% of bacteria"}},"callout_YtQUNE":{"type":"callout","settings":{"title":"LED Clock Display","subtitle":"Auto-sterilizes at set times"}},"callout_G9Pith":{"type":"callout","settings":{"title":"3 Rinse Cups Included","subtitle":"Family-ready storage"}},"callout_CExFFe":{"type":"callout","settings":{"title":"Holds 4 Brushes + Razor","subtitle":"Fits whole family"}},"callout_qL7NdJ":{"type":"callout","settings":{"title":"UVC Light Beam","subtitle":"Kills 99.9% of bacteria"}},"callout_4LMn6N":{"type":"callout","settings":{"title":"3 Rinse Cups Included","subtitle":"Family-ready storage"}}},"block_order":["callout_MGnzf6","callout_YtQUNE","callout_G9Pith","callout_CExFFe","callout_qL7NdJ","callout_4LMn6N"],"name":"Main Hero","settings":{"main_image":"shopify:\/\/shop_images\/product_2.png"}}},"order":["product_annotated_hero_U79QMa"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "product_annotated_hero_U79QMa": {
+      "type": "product-annotated-hero",
+      "blocks": {
+        "callout_MGnzf6": {
+          "type": "callout",
+          "settings": {
+            "title": "UVC Light Beam",
+            "subtitle": "Kills 99.9% of bacteria"
+          }
+        },
+        "callout_YtQUNE": {
+          "type": "callout",
+          "settings": {
+            "title": "LED Clock Display",
+            "subtitle": "Auto-sterilizes at set times"
+          }
+        },
+        "callout_G9Pith": {
+          "type": "callout",
+          "settings": {
+            "title": "3 Rinse Cups Included",
+            "subtitle": "Family-ready storage"
+          }
+        },
+        "callout_CExFFe": {
+          "type": "callout",
+          "settings": {
+            "title": "Holds 4 Brushes + Razor",
+            "subtitle": "Fits whole family"
+          }
+        },
+        "callout_qL7NdJ": {
+          "type": "callout",
+          "settings": {
+            "title": "UVC Light Beam",
+            "subtitle": "Kills 99.9% of bacteria"
+          }
+        },
+        "callout_4LMn6N": {
+          "type": "callout",
+          "settings": {
+            "title": "3 Rinse Cups Included",
+            "subtitle": "Family-ready storage"
+          }
+        }
+      },
+      "block_order": [
+        "callout_MGnzf6",
+        "callout_YtQUNE",
+        "callout_G9Pith",
+        "callout_CExFFe",
+        "callout_qL7NdJ",
+        "callout_4LMn6N"
+      ],
+      "name": "Main Hero",
+      "settings": {
+        "main_image": "shopify://shop_images/product_2.png"
+      }
+    },
+    "why_uv_iNMf4h": {
+      "type": "why-uv",
+      "blocks": {
+        "stat_pgHXdB": {
+          "type": "stat",
+          "settings": {
+            "value": "99.9%",
+            "label": "Bacteria killed per UVC cycle"
+          }
+        },
+        "stat_7dqi4R": {
+          "type": "stat",
+          "settings": {
+            "value": "<5%",
+            "label": "Bacteria removed by rinsing"
+          }
+        },
+        "stat_BEfHL3": {
+          "type": "stat",
+          "settings": {
+            "value": "99s",
+            "label": "Full sterilization cycle time"
+          }
+        },
+        "stat_n8eQap": {
+          "type": "stat",
+          "settings": {
+            "value": "0",
+            "label": "Chemicals used — ever"
+          }
+        }
+      },
+      "block_order": [
+        "stat_pgHXdB",
+        "stat_7dqi4R",
+        "stat_BEfHL3",
+        "stat_n8eQap"
+      ],
+      "name": "Why UV?",
+      "settings": {
+        "image": "shopify://shop_images/bacteria-threat-illustration.svg",
+        "image_alt": "Bacteria threat infographic",
+        "badge": "Did You Know?",
+        "title": "Your Toothbrush Is Never Really Clean.",
+        "description_1": "Most people rinse their toothbrush and assume it's clean. It isn't. Bacteria colonise the bristles within hours of each use — from toilet aerosols, open air, and moisture. You put this in your mouth twice a day.",
+        "description_2": "UVC light is the same technology hospitals use to sterilize surgical equipment. At the right wavelength, it breaks down bacterial DNA — eliminating 99.9% of germs in under two minutes, with no chemicals and no residue."
+      }
+    },
+    "featured_product_card_ypBDia": {
+      "type": "featured-product-card",
+      "blocks": {
+        "product_card_gtmkTP": {
+          "type": "product_card",
+          "settings": {
+            "product": "wall-mounted-uvc-toothbrush-sterilizer",
+            "tag": "Best for Travel",
+            "tagline": "Travel anywhere. Stay protected.",
+            "feature_1": "UVC 99.9% kill rate — hospital grade",
+            "feature_2": "One-key automatic start & stop",
+            "feature_3": "1500 mAh · ~15 days battery life",
+            "feature_4": "Drainage system prevents bacteria breeding",
+            "price_note": "Free shipping included"
+          }
+        },
+        "product_card_eDBmDB": {
+          "type": "product_card",
+          "settings": {
+            "product": "portable-uv-toothbrush-sanitizer",
+            "tag": "Best for Travel",
+            "tagline": "Travel anywhere. Stay protected.",
+            "feature_1": "UVC 99.9% kill rate — hospital grade",
+            "feature_2": "One-key automatic start & stop",
+            "feature_3": "1500 mAh · ~15 days battery life",
+            "feature_4": "Drainage system prevents bacteria breeding",
+            "price_note": "Free shipping included"
+          }
+        },
+        "product_card_BxLXQU": {
+          "type": "product_card",
+          "settings": {
+            "product": "wall-mounted-uvc-toothbrush-sterilizer",
+            "tag": "Best for Single",
+            "tagline": "Travel anywhere. Stay protected.",
+            "feature_1": "UVC 99.9% kill rate — hospital grade",
+            "feature_2": "One-key automatic start & stop",
+            "feature_3": "1500 mAh · ~15 days battery life",
+            "feature_4": "Drainage system prevents bacteria breeding",
+            "price_note": "Free shipping included"
+          }
+        },
+        "product_card_raUccQ": {
+          "type": "product_card",
+          "settings": {
+            "product": "portable-uv-toothbrush-sanitizer",
+            "tag": "Best for Travel",
+            "tagline": "Travel anywhere. Stay protected.",
+            "feature_1": "UVC 99.9% kill rate — hospital grade",
+            "feature_2": "One-key automatic start & stop",
+            "feature_3": "1500 mAh · ~15 days battery life",
+            "feature_4": "Drainage system prevents bacteria breeding",
+            "price_note": "Free shipping included"
+          }
+        }
+      },
+      "block_order": [
+        "product_card_gtmkTP",
+        "product_card_eDBmDB",
+        "product_card_BxLXQU",
+        "product_card_raUccQ"
+      ],
+      "name": "Featured Product Cards",
+      "settings": {
+        "section_badge": "Our Products",
+        "section_title": "UV Sanitizers — Choose Your Clean",
+        "section_sub": "Two products, one mission: a bacteria-free toothbrush every single day."
+      }
+    },
+    "why_uvc_works_Hehixn": {
+      "type": "why-uvc-works",
+      "blocks": {
+        "feature_brx8eG": {
+          "type": "feature",
+          "settings": {
+            "icon_emoji": "🏥",
+            "title": "Hospital-Used Technology",
+            "description": "UVC is the same method used to sterilize surgical equipment and hospital rooms."
+          }
+        },
+        "feature_AnY3g8": {
+          "type": "feature",
+          "settings": {
+            "icon_emoji": "🧬",
+            "title": "DNA-Level Destruction",
+            "description": "UVC breaks the DNA bonds of bacteria, viruses, and mold — not just surfaces."
+          }
+        },
+        "feature_E7XTzn": {
+          "type": "feature",
+          "settings": {
+            "icon_emoji": "✅",
+            "title": "Certified & Tested",
+            "description": "CE, FCC, RoHS certified. Independently tested by Guangdong Detection Center of Microbiology."
+          }
+        }
+      },
+      "block_order": [
+        "feature_brx8eG",
+        "feature_AnY3g8",
+        "feature_E7XTzn"
+      ],
+      "name": "Why UVC Works",
+      "settings": {
+        "badge": "Science-Backed",
+        "heading": "Why UVC Light Works",
+        "intro": "UVC light at 260–270nm penetrates bacterial cell walls and disrupts the DNA structure — permanently destroying the organism's ability to reproduce.",
+        "image": "shopify://shop_images/uvc-sterilization-99percent-science.png",
+        "image_alt": "UVC sterilization technology"
+      }
+    }
+  },
+  "order": [
+    "product_annotated_hero_U79QMa",
+    "why_uv_iNMf4h",
+    "featured_product_card_ypBDia",
+    "why_uvc_works_Hehixn"
+  ]
+}

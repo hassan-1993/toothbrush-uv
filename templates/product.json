@@ -1,1 +1,195 @@
-{"sections":{"main":{"type":"main-product","blocks":{"vendor":{"type":"text","settings":{"text":"{{ product.vendor }}","text_style":"uppercase"}},"title":{"type":"title","settings":{}},"price":{"type":"price","settings":{}},"variant_picker":{"type":"variant_picker","settings":{"picker_type":"button","swatch_shape":"circle"}},"quantity_selector":{"type":"quantity_selector","settings":{}},"buy_buttons":{"type":"buy_buttons","settings":{"show_dynamic_checkout":true,"show_gift_card_recipient":true}},"description":{"type":"description","settings":{}},"share":{"type":"share","settings":{"share_label":"Share"}}},"block_order":["vendor","title","price","variant_picker","quantity_selector","buy_buttons","description","share"],"settings":{"enable_sticky_info":true,"color_scheme":"scheme-1","media_size":"large","constrain_to_viewport":true,"media_fit":"contain","gallery_layout":"stacked","mobile_thumbnails":"hide","media_position":"left","image_zoom":"lightbox","hide_variants":true,"enable_video_looping":false,"padding_top":36,"padding_bottom":12}},"related-products":{"type":"related-products","settings":{"heading":"You may also like","heading_size":"h2","products_to_show":4,"columns_desktop":4,"columns_mobile":"2","color_scheme":"scheme-1","image_ratio":"square","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"padding_top":36,"padding_bottom":28}}},"order":["main","related-products"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main_product_custom_4RGeVH": {
+      "type": "main-product-custom",
+      "blocks": {
+        "desc_item_wbeehB": {
+          "type": "desc_item",
+          "settings": {
+            "heading": "A Bacteria-Free Brush. Every Time.",
+            "content": "<p>Most people never think about what's living on their toothbrush. In reality, your toothbrush is one of the most bacteria-laden objects in your home — exposed to open air, bathroom humidity, and airborne particles from every toilet flush. Water-rinsing removes less than 5% of bacteria. Toothbrush covers trap moisture and actually make it worse.</p><p>The HimayaHome Portable UV Toothbrush Sanitizer uses the same UVC technology trusted in hospitals to sterilize surgical instruments. One press eliminates 99.9% of bacteria, viruses, and mold from your toothbrush bristles in a 99-second cycle — automatically, with zero chemicals.</p>"
+          }
+        },
+        "desc_item_6PdKze": {
+          "type": "desc_item",
+          "settings": {
+            "heading": "Sterilization + Storage in One",
+            "content": "<p>The device does double duty — it sterilizes your brush with UVC light<em>and</em>stores it in a sealed, enclosed case so it stays protected until your next use. No more leaving your brush exposed on a counter. No more bristles touching surfaces. Maximum length supported: 15.5 cm — fits standard and most electric toothbrush handles.</p>"
+          }
+        },
+        "desc_item_dr8yHQ": {
+          "type": "desc_item",
+          "settings": {
+            "heading": "Drainage System — No Bacteria Breeding Inside",
+            "content": "<p>A common problem with toothbrush covers is moisture buildup — wet bristles in an enclosed space become a bacteria farm. HimayaHome solves this with two drainage outlets at the base of the sterilization bin. Water drains out, air circulates in, and the interior stays dry and clean between uses.</p>"
+          }
+        },
+        "desc_item_Jp4Nba": {
+          "type": "desc_item",
+          "settings": {
+            "heading": "Who It's For",
+            "content": "<p>This was built for people on the move — frequent travelers, gym-goers, parents who take their kids' oral hygiene seriously, and anyone who doesn't want to think about what's growing on their toothbrush. Compact enough to slide into a handbag or carry-on, it works just as well at home on your bathroom counter.</p>"
+          }
+        },
+        "desc_item_XgULFe": {
+          "type": "desc_item",
+          "settings": {
+            "heading": "What's in the Box",
+            "content": "<ul><li>1× HimayaHome Portable UV Toothbrush Sanitizer</li><li>1× USB-C Charging Cable</li><li>1× User Manual</li></ul>"
+          }
+        },
+        "faq_hmVJj6": {
+          "type": "faq",
+          "settings": {
+            "question": "you",
+            "answer": "yes"
+          }
+        },
+        "spec_ATciWb": {
+          "type": "spec",
+          "settings": {
+            "spec_key": "Sterilization Technology",
+            "spec_value": "UVC Light (260–270nm)"
+          }
+        },
+        "spec_t9Kfq6": {
+          "type": "spec",
+          "settings": {
+            "spec_key": "Sterilization Rate",
+            "spec_value": "99.9% bacteria, viruses, and mold"
+          }
+        },
+        "spec_neDKNg": {
+          "type": "spec",
+          "settings": {
+            "spec_key": "Battery Capacity",
+            "spec_value": "1500 mAh lithium"
+          }
+        },
+        "spec_gbDT3x": {
+          "type": "spec",
+          "settings": {
+            "spec_key": "Battery Life",
+            "spec_value": "~15 days per charge"
+          }
+        },
+        "spec_KCQK4z": {
+          "type": "spec",
+          "settings": {
+            "spec_key": "Charging",
+            "spec_value": "USB Type-C"
+          }
+        },
+        "spec_NXjFJN": {
+          "type": "spec",
+          "settings": {
+            "spec_key": "Max Toothbrush Length",
+            "spec_value": "15.5 cm"
+          }
+        },
+        "faq_6aJQFj": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does one sterilization cycle take?",
+            "answer": "The standard cycle runs for approximately 90–99 seconds and stops automatically — no manual intervention needed."
+          }
+        },
+        "faq_Xmm6tY": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it safe to use around children?",
+            "answer": "Yes. The UVC light only activates when the cover is fully closed, preventing any UV exposure."
+          }
+        },
+        "faq_9XMpdE": {
+          "type": "faq",
+          "settings": {
+            "question": "What toothbrush sizes does it fit?",
+            "answer": "Most standard and electric toothbrushes. The handle must not exceed 15.5 cm."
+          }
+        },
+        "faq_HkDzfC": {
+          "type": "faq",
+          "settings": {
+            "question": "Is the unit waterproof?",
+            "answer": "It has drainage outlets to handle moisture, but is not designed to be submerged in water."
+          }
+        }
+      },
+      "block_order": [
+        "desc_item_wbeehB",
+        "desc_item_6PdKze",
+        "desc_item_dr8yHQ",
+        "desc_item_Jp4Nba",
+        "desc_item_XgULFe",
+        "faq_hmVJj6",
+        "spec_ATciWb",
+        "spec_t9Kfq6",
+        "spec_neDKNg",
+        "spec_gbDT3x",
+        "spec_KCQK4z",
+        "spec_NXjFJN",
+        "faq_6aJQFj",
+        "faq_Xmm6tY",
+        "faq_9XMpdE",
+        "faq_HkDzfC"
+      ],
+      "name": "Product Page — Custom",
+      "settings": {
+        "subtitle": "Travel-Ready UVC Sterilization — Kills 99.9% of Bacteria",
+        "blurb": "A compact UV sterilization case that kills 99.9% of bacteria on your toothbrush bristles in a 99-second automatic cycle. Powered by a 1500 mAh battery (up to 15 days per charge), rechargeable via USB-C, and fitted with drainage outlets to keep the interior dry between uses. Max toothbrush handle length: 15.5 cm.",
+        "badge_label": "Best for Travel",
+        "price_note": "",
+        "show_free_shipping": true,
+        "show_buy_it_now": true,
+        "pill_1": "99.9% Bacteria Killed",
+        "pill_2": "1500 mAh Battery",
+        "pill_3": "~15 Days Battery Life",
+        "pill_4": "USB-C Charging",
+        "pill_5": "Travel Size",
+        "pill_6": "",
+        "guarantee_1_icon": "🚚",
+        "guarantee_1_label": "Free Shipping",
+        "guarantee_1_sub": "on all orders",
+        "guarantee_2_icon": "↩️",
+        "guarantee_2_label": "30-Day Returns",
+        "guarantee_2_sub": "no questions asked",
+        "guarantee_3_icon": "🔒",
+        "guarantee_3_label": "Secure Checkout",
+        "guarantee_3_sub": "SSL encrypted",
+        "trust_text": "✅ CE, FCC & RoHS certified · Independently lab-tested by Guangdong Detection Center of Microbiology"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main_product_custom_4RGeVH",
+    "related-products"
+  ]
+}

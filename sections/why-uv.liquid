@@ -1,0 +1,256 @@
+{% comment %}
+  Section: Why UV?
+  Split layout — infographic image on left, heading + description + 4 stat cards on right.
+  All content editable via theme customizer.
+{% endcomment %}
+
+<style>
+  .hh-why-uv {
+    background: #f4f7f9;
+    padding: 80px 0;
+  }
+  .hh-why-uv__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .hh-why-uv__layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  /* ── Left: image ── */
+  .hh-why-uv__image {
+    width: 100%;
+    display: block;
+    border: 1px solid #dde4ec;
+    box-shadow: 0 4px 24px rgba(11,79,114,0.10);
+  }
+
+  /* ── Right: text ── */
+  .hh-why-uv__badge {
+    display: inline-block;
+    background: rgba(11,79,114,0.08);
+    color: #0b4f72;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(11,79,114,0.15);
+  }
+  .hh-why-uv__title {
+    font-family: var(--font-heading-family, sans-serif);
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 700;
+    color: #0d1b2a;
+    line-height: 1.2;
+    margin: 0 0 20px;
+  }
+  .hh-why-uv__desc {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.8;
+    margin: 0 0 16px;
+  }
+  .hh-why-uv__desc strong {
+    color: #0b4f72;
+    font-weight: 700;
+  }
+
+  /* ── Stat cards grid ── */
+  .hh-why-uv__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .hh-stat {
+    background: #fff;
+    border-left: 4px solid #0b4f72;
+    padding: 16px 18px;
+  }
+  .hh-stat__value {
+    font-family: var(--font-heading-family, sans-serif);
+    font-size: 28px;
+    font-weight: 700;
+    color: #0b4f72;
+    line-height: 1.1;
+  }
+  .hh-stat__label {
+    font-size: 13px;
+    color: #777;
+    margin-top: 5px;
+    line-height: 1.4;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .hh-why-uv__layout {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .hh-why-uv { padding: 56px 0; }
+  }
+  @media (max-width: 480px) {
+    .hh-why-uv__stats { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .hh-stat__value { font-size: 22px; }
+  }
+</style>
+
+<section class="hh-why-uv">
+  <div class="hh-why-uv__container">
+    <div class="hh-why-uv__layout">
+
+      <!-- LEFT: Infographic image -->
+      <div>
+        {% if section.settings.image != blank %}
+          <img
+            class="hh-why-uv__image"
+            src="{{ section.settings.image | image_url: width: 900 }}"
+            alt="{{ section.settings.image_alt | escape }}"
+            width="600"
+            height="auto"
+            loading="lazy"
+          >
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg hh-why-uv__image' }}
+        {% endif %}
+      </div>
+
+      <!-- RIGHT: Text + stats -->
+      <div>
+        {% if section.settings.badge != blank %}
+          <div class="hh-why-uv__badge">{{ section.settings.badge }}</div>
+        {% endif %}
+
+        {% if section.settings.title != blank %}
+          <h2 class="hh-why-uv__title">{{ section.settings.title }}</h2>
+        {% endif %}
+
+        {% if section.settings.description_1 != blank %}
+          <p class="hh-why-uv__desc">{{ section.settings.description_1 }}</p>
+        {% endif %}
+
+        {% if section.settings.description_2 != blank %}
+          <p class="hh-why-uv__desc">{{ section.settings.description_2 }}</p>
+        {% endif %}
+
+        <!-- 4 stat cards -->
+        <div class="hh-why-uv__stats">
+          {% for block in section.blocks %}
+            <div class="hh-stat" {{ block.shopify_attributes }}>
+              <div class="hh-stat__value">{{ block.settings.value }}</div>
+              <div class="hh-stat__label">{{ block.settings.label }}</div>
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Why UV?",
+  "tag": "section",
+  "class": "hh-why-uv-section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Infographic image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "Bacteria threat infographic"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge label",
+      "default": "Did You Know?"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Your Toothbrush Is Never Really Clean."
+    },
+    {
+      "type": "textarea",
+      "id": "description_1",
+      "label": "First paragraph",
+      "default": "Most people rinse their toothbrush and assume it's clean. It isn't. Bacteria colonise the bristles within hours of each use — from toilet aerosols, open air, and moisture. You put this in your mouth twice a day."
+    },
+    {
+      "type": "textarea",
+      "id": "description_2",
+      "label": "Second paragraph",
+      "default": "UVC light is the same technology hospitals use to sterilize surgical equipment. At the right wavelength, it breaks down bacterial DNA — eliminating 99.9% of germs in under two minutes, with no chemicals and no residue."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "99.9%"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Bacteria killed per UVC cycle"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why UV?",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "value": "99.9%",
+            "label": "Bacteria killed per UVC cycle"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "<5%",
+            "label": "Bacteria removed by rinsing"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "99s",
+            "label": "Full sterilization cycle time"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "value": "0",
+            "label": "Chemicals used — ever"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
