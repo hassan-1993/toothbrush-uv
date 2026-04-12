@@ -629,9 +629,6 @@
               <span class="hh-pdp__sale-note">Limited Time Deal — Save {{ saved_pct }}%</span>
             {%- else -%}
               {%- if cart.taxes_included -%}Taxes included{%- endif -%}
-              {%- if product.selected_or_first_available_variant.requires_shipping and section.settings.show_free_shipping -%}
-                {%- if cart.taxes_included %} · {%- endif -%}Free shipping
-              {%- endif -%}
             {%- endif -%}
           </div>
         </div>
