@@ -575,6 +575,7 @@
                 data-src="{{ image | image_url: width: 1000 }}"
                 data-alt="{{ image.alt | default: product.title | escape }}"
                 onclick="hhSwitchImg(this, '{{ section.id }}')"
+                onmouseenter="hhSwitchImg(this, '{{ section.id }}')"
               >
                 <img
                   src="{{ image | image_url: width: 200 }}"
