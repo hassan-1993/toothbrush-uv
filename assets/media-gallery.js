@@ -14,9 +14,9 @@ if (!customElements.get('media-gallery')) {
 
         this.elements.viewer.addEventListener('slideChanged', debounce(this.onSlideChanged.bind(this), 500));
         this.elements.thumbnails.querySelectorAll('[data-target]').forEach((mediaToSwitch) => {
-          const btn = mediaToSwitch.querySelector('button');
-          btn.addEventListener('click', this.setActiveMedia.bind(this, mediaToSwitch.dataset.target, false));
-          btn.addEventListener('mouseenter', this.setActiveMedia.bind(this, mediaToSwitch.dataset.target, false));
+          mediaToSwitch
+            .querySelector('button')
+            .addEventListener('click', this.setActiveMedia.bind(this, mediaToSwitch.dataset.target, false));
         });
         if (this.dataset.desktopLayout.includes('thumbnail') && this.mql.matches) this.removeListSemantic();
       }
