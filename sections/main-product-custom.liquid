@@ -54,7 +54,7 @@
 .hh-pdp__main-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.4s ease;
 }
 .hh-pdp__main-img:hover img { transform: scale(1.04); }
@@ -271,6 +271,11 @@
 .hh-pdp__price-note {
   font-size: 1.3rem;
   color: rgba(var(--color-foreground), 0.5);
+}
+.hh-pdp__sale-note {
+  color: #b12704;
+  font-weight: 600;
+  font-size: 1.4rem;
 }
 .hh-pdp__discount-badge {
   display: inline-flex;
@@ -617,6 +622,10 @@
           <div class="hh-pdp__price-note">
             {%- if section.settings.price_note != blank -%}
               {{ section.settings.price_note }}
+            {%- elsif current_variant.compare_at_price > current_variant.price -%}
+              {%- assign saved_amount = current_variant.compare_at_price | minus: current_variant.price -%}
+              {%- assign saved_pct = saved_amount | times: 100 | divided_by: current_variant.compare_at_price -%}
+              <span class="hh-pdp__sale-note">Limited Time Deal — Save {{ saved_pct }}%</span>
             {%- else -%}
               {%- if cart.taxes_included -%}Taxes included{%- endif -%}
               {%- if product.selected_or_first_available_variant.requires_shipping and section.settings.show_free_shipping -%}
